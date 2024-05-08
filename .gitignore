@@ -1,0 +1,9 @@
+/.vscode/sftp.*
+/.vscode/*.code-workspace
+.htaccess
+.editorconfig
+/backups/*
+/_assets/libs/*
+/_assets/fonts/*
+/_assets/dbconn/*
+/tmp/*
