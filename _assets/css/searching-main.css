@@ -1,0 +1,91 @@
+#searchingOutput-modal .resultItem {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0.5rem 0.5rem;
+    margin: 1.25rem 0;
+    /* border-radius: 1rem; */
+    /* border-bottom: 1px solid #6C757D; */
+}
+
+#searchingOutput-modal .resultItem .resultItem-badges a.badge,
+#searchingOutput-modal .resultItem .resultItem-badges span {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 0.85rem;
+}
+
+#searchingOutput-modal .resultItem .resultItem-title,
+#searchingOutput-modal .resultItem .resultItem-title a {
+    font-family: "Stolzl", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 0.85rem;
+}
+
+.badge-nobg {
+    font-weight: 400;
+    background-color: transparent;
+    color: white;
+}
+
+#searchingOutput-modal .resultItem .resultItem-link {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 1.0rem;
+    font-weight: 400;
+    line-height: 1.3rem;
+}
+
+#searchingOutput-modal .resultItem .resultItem-link a,
+#searchingOutput-modal .resultItem .resultItem-link a:hover {
+    color: #00AEFE;
+}
+
+#searchingOutput-modal .resultItem .resultItem-badges .caption,
+#searchingOutput-modal .resultItem .resultItem-text .caption {
+    color: #999999;
+}
+
+#searchingOutput-modal .resultItem .resultItem-text .file-link a {
+    font-weight: 400;
+}
+
+#searchingOutput-modal .resultItem .resultItem-text .file-link a:hover {
+    color: #FFFFFF;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+#searchingOutput-modal .resultItem .resultItem-text a {
+    color: #00AEFE;
+}
+
+#searchingOutput-modal .resultItem .resultItem-text a:hover {
+    color: #CCCCCC;
+    text-decoration: underline;
+}
+
+#searchingOutput-modal .resultItem .resultItem-text {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 0.85rem;
+    color: #AAAAAA;
+    line-height: 1.15rem;
+}
+
+#searchingOutput-modal .resultCount {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 1.45rem;
+}
+
+#searchInput-clear:hover,
+#searchInput-settings:hover,
+#searchInput-help:hover {
+    cursor: pointer;
+    color: white !important;
+}
+
+/* Output doc_stage */
+#searchingOutput-modal .modal-dialog .modal-body span.doc-stage.caption {}
+
+#searchingOutput-modal .modal-dialog .modal-body span.doc-stage.numberstage,
+#searchingOutput-modal .modal-dialog .modal-body span.doc-stage.docnumber {}
+
+#searchingOutput-modal .modal-dialog .modal-body span.doc-stage.numberstage {}

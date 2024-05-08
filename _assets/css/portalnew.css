@@ -1,0 +1,306 @@
+#portalnew-top,
+#portalnew-center,
+#portalnew-bottom {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+#portalnew-center {}
+
+#portalnew-main-center-icons .service-item {
+    padding: 1rem;
+}
+
+
+#portalnew-main-center-icons .service-icon {
+    min-width: 64px;
+    min-height: 64px;
+}
+
+#portalnew-main-center-icons .service-item:hover {
+    background-color: #31373C;
+    border-radius: 1rem;
+}
+
+#portalnew-main-input:focus {}
+
+
+#portalnew-main-center-icons .service-item .service-title {
+    color: #CCCCCC;
+    font-size: 0.9rem;
+}
+
+
+/* ----- */
+
+
+#portalnew-main-top,
+#portalnew-main-center,
+#portalnew-main-bottom {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+#portalnew-main-top {
+    min-height: 15rem;
+}
+
+#portalnew-main-center {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#portlnew-navbar div.navbar-title>h1.onair {
+    color: #F3AD2E;
+}
+
+#portalnew-main-center .hide {
+    display: none;
+}
+
+
+.corner-box {
+    display: inline-block;
+    width: auto;
+    position: relative;
+    /* border: 1px solid #6C757D; */
+    /* border: 1px solid #212529; */
+    transition: all .3s ease;
+}
+
+.corner-box-topC:before,
+.corner-box-topC:after,
+.corner-box-bottomL:before,
+.corner-box-bottomL:after,
+.corner-box-bottomR:before,
+.corner-box-bottomR:after {
+    content: "";
+    z-index: 1;
+    display: block;
+    position: absolute;
+    /* background: #161617; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.corner-box-topL:before,
+.corner-box-topL:after,
+.corner-box-topR:before,
+.corner-box-topR:after,
+.corner-box-bottomC:before,
+.corner-box-bottomC:after {
+    content: "";
+    z-index: 1;
+    display: block;
+    position: absolute;
+    /* background: #28292A; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.corner-box:hover {
+    border-color: #AAAAAA;
+}
+
+.card.corner-box-bottomC,
+.card.corner-box-topL,
+.card.corner-box-topR {
+    /* background: #28292A !important; */
+}
+
+.card.corner-box-topC,
+.card.corner-box-bottomL,
+.card.corner-box-bottomR {
+    /* background: none !important; */
+    /* background-color: transparent !important; */
+}
+
+.corner-box-icons {
+    border: 1px solid #AAAAAA;
+}
+
+.corner-box:before {
+    width: calc(100% + 4px);
+    height: 80%;
+    transition: height 0.6s;
+}
+
+.corner-box:after {
+    height: calc(100% + 4px);
+    width: 90%;
+    transition: width 0.6s;
+}
+
+.corner-box:hover:before,
+.corner-box:focus:before {
+    height: 50%;
+}
+
+.corner-box:hover:after,
+.corner-box:focus:after {
+    width: 75%;
+}
+
+.corner-textbox {
+    z-index: 2;
+    position: relative;
+}
+
+
+/* ----- */
+
+
+#portalnew-main-bottom-blocks .service-item a,
+#portalnew-main-bottom-blocks .service-item div#portalCloudFiles-button,
+#portalnew-main-bottom-files .service-item div#portalCloudFiles-button {
+    padding: 0.75rem 0.75rem;
+    margin: 0.25rem 0;
+    min-width: 10rem;
+    min-height: 5rem;
+}
+
+#portalnew-main-bottom-blocks .service-icon,
+#portalnew-main-bottom-files .service-icon {
+    min-width: 32px;
+    min-height: 32px;
+}
+
+#portalnew-main-bottom-blocks .service-item a:hover,
+#portalnew-main-bottom-blocks .service-item div#portalCloudFiles-button:hover,
+#portalnew-main-bottom-files .service-item div#portalCloudFiles-button:hover {
+    background-color: #31373C;
+    border-radius: 1rem;
+    color: #CCCCCC !important;
+    text-decoration: none;
+}
+
+#portalnew-main-bottom-blocks .card .card-title {
+    font-size: 1.35rem;
+}
+
+#portalnew-main-bottom-blocks .service-item .service-title,
+#portalnew-main-bottom-files .service-item .service-title {
+    color: #CCCCCC;
+    font-size: 1rem;
+}
+
+#currentBirthdays {
+    font-size: 0.8rem;
+}
+
+
+#portalnew-main-bottom-files .drag-over {
+    border-color: #FFC107;
+}
+
+#portalnew-main-bottom-files .drag-caption.over {
+    color: #FFC107;
+}
+
+#portalnew-main-bottom-files .drag-none {
+    border-color: #222222;
+    color: #222222;
+}
+
+#portalnew-main-bottom-files .drag-caption.none {
+    color: #222222;
+}
+
+#portalCloudFiles-button:hover {
+    cursor: pointer;
+}
+
+#table-portalCloudFiles>thead,
+#table-portalCloudFiles>tbody {
+    font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+#table-portalCloudFiles>thead>tr>th,
+#table-portalCloudFiles>tbody>tr>td {
+    padding: 0.5rem 0.25rem;
+    font-weight: 400;
+}
+
+#table-portalCloudFiles>thead>tr>th {
+    font-size: 0.9rem;
+    color: #F1F1F1;
+
+}
+
+#table-portalCloudFiles>tbody>tr>td {
+    font-size: 0.8rem;
+    color: #CCCCCC;
+}
+
+#table-portalCloudFiles>tbody>tr>td a:hover {
+    color: inherit;
+}
+
+#table-portalCloudFiles>tbody>tr>td i:hover {
+    cursor: pointer;
+}
+
+#table-portalCloudFiles>tbody>tr>td:first-child {
+    text-align: left;
+    min-width: 18%;
+    max-width: 38%;
+}
+
+#table-portalCloudFiles>tbody>tr>td:nth-child(2) {
+    text-align: left;
+    min-width: 60%;
+    max-width: 80%;
+}
+
+#table-portalCloudFiles>tbody>tr>td:nth-child(3) {
+    text-align: center;
+    width: 2%;
+}
+
+#table-portalCloudFiles>tbody>tr>td.dataTables_empty {
+    text-align: center;
+}
+
+#table-portalCloudFiles_wrapper .page-item .page-link {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    padding: 0.25rem 0.5rem;
+    color: #CCCCCC;
+    background-color: #31373C;
+    border-color: #31373C;
+}
+
+#table-portalCloudFiles_wrapper .page-item.active .page-link {
+    color: #FFC107;
+    background-color: #222222;
+    border-color: #31373C;
+}
+
+#currentDinner div.digit {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.0rem;
+    line-height: 3.0rem;
+}
+
+#currentDinner div.text {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+}
+
+/* hide scrollbar but allow scrolling */
+#loadedData-help-modal .modal-body,
+#ListMessages-modal .modal-body {
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+    /* for Firefox */
+    overflow-y: scroll;
+}
+
+#loadedData-help-modal .modal-body::-webkit-scrollbar,
+#ListMessages-modal .modal-body::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
+}

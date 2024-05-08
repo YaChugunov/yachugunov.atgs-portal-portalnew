@@ -1,0 +1,19 @@
+#changeslogList {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+#changeslogList .title h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.0rem;
+    font-weight: 400;
+    line-height: 0.75em;
+}
+
+#changeslogList .title .small {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 200;
+    line-height: 1.5rem;
+    padding-left: 1.55rem;
+}

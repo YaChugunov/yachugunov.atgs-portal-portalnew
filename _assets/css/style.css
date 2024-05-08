@@ -1,0 +1,124 @@
+/* Preloader
+----------------------------------------------- */
+body {
+    background-color: #161617 !important;
+    color: #CCCCCC;
+}
+
+#before-load {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 1001;
+}
+
+#before-load i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -35px 0 0 -35px;
+}
+
+#before-load i {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: url('../images/loading2.gif') no-repeat 50% 50%;
+    margin: -35px 0 0 -35px;
+}
+
+
+
+.container-psize {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+@media (min-width: 1399.98px) {
+
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl,
+    .container-psize {
+        max-width: 1340px;
+    }
+}
+
+
+#servicename-portalnew .vh-content {
+    min-height: calc(100vh - 439px);
+}
+
+nav#nav-topmenu .navbar-brand,
+nav#nav-submenu .navbar-brand {
+    font-size: 1rem;
+}
+
+nav#nav-topmenu.navbar a.navbar-brand {
+    line-height: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+nav#nav-topmenu.navbar a.navbar-brand:hover {
+    text-decoration: none;
+}
+
+nav#nav-topmenu.navbar a.navbar-brand span.navb-line1 {
+    color: #49AAEE;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: none;
+}
+
+nav#nav-topmenu.navbar .nav-item a.nav-link {
+    color: #333;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    /* border: 1px solid transparent; */
+    /* border-radius: 8px; */
+}
+
+nav#nav-topmenu.navbar .nav-item.active a.nav-link {
+    color: #FFF;
+    border-radius: 8px;
+    background-color: #0178FA;
+}
+
+nav#nav-submenu.navbar .nav-item.active a.nav-link {
+    color: #0178FA;
+    outline: 1px solid #0178FA;
+    outline-offset: -1px;
+    border-radius: 8px;
+}
+
+nav#nav-submenu.navbar a.navbar-brand span.navb-line2 {
+    color: #333;
+    font-family: 'Stolzl Book', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-transform: none;
+}
+
+nav#nav-submenu.navbar a.nav-link {
+    color: #333;
+    font-family: 'Stolzl Book', sans-serif;
+    font-size: 0.85rem;
+}
+
+nav#nav-topmenu.navbar .nav-item:not(.active) a.nav-link:hover,
+nav#nav-submenu.navbar .nav-item:not(.active) a.nav-link:hover {
+    text-decoration: underline;
+}
