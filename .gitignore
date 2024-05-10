@@ -1,5 +1,4 @@
 /.vscode/sftp.*
-/.vscode/*.code-workspace
 .htaccess
 .editorconfig
 /_assets/libs/*
