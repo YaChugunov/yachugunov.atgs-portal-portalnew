@@ -1,6 +1,9 @@
+/_tmp/*
 /.vscode/sftp.*
 .htaccess
 .editorconfig
+.gitignore
+.gitattributes
 /_assets/libs/*
 /_assets/fonts/*
 /_assets/dbconn/*
