@@ -87,7 +87,10 @@
     };
 
     function ajaxRequest_searchHelp(responseHandler) {}
-
+    //
+    //
+    //
+    function ajaxRequest_liveSearchUser(strSearch, responseHandler) {}
 
     //
 </script>
@@ -96,6 +99,43 @@
 # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 # 
 ?>
+
+<style>
+    #search_box-result {
+        position: relative;
+        margin: 0 1rem;
+    }
+
+    /* Стили для плашки с результатами */
+    .search_result {
+        font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+        font-size: 0.85rem;
+        color: #333333;
+        position: absolute;
+        z-index: 9999;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        margin-top: 0.35rem;
+        width: 100%;
+    }
+
+    .search_result .title {
+        font-size: 1.0rem !important;
+        font-weight: 700 !important;
+        color: #000000 !important;
+
+    }
+
+    .search_result .row-item:nth-child(even) {
+        background-color: #F1F1F1;
+    }
+
+    .search_result .row-item:nth-child(odd) {
+        background-color: transparent;
+    }
+</style>
+
 <div class="container d-flex flex-column">
 
     <div id="portalnew-main-center-icons" class="d-flex flex-row justify-content-center py-3">
@@ -153,15 +193,21 @@
         </div>
     </div>
 
-    <div id="portalnew-main-input" class="d-flex flex-row shadow input-inactive-border">
-        <input id="main-input" class="main-input form-control form-control-lg" type="text" placeholder="Тыкайте сюда, не бойтесь">
-        <div class="d-flex align-self-center py-3 px-1" data-toggle="popover" data-content='<div class="text-center">Очистить поле поискового запроса.</div>'><i id="searchInput-clear" class="fa-solid fa-xmark fa-2xl mx-2 align-self-center text-secondary"></i></div>
-        <div class="d-flex align-self-center py-3 px-1" data-toggle="popover" data-content='<div class="text-center">Настройка текущего поиска. Можно выбрать поиск как по всем разделам Портала, так и по какому-то отдельному.</div>'>
-            <i id="searchInput-settings" class="fa-solid fa-gear fa-2xl mx-2 align-self-center text-secondary"></i>
+    <div class="d-flex flex-column">
+        <div id="portalnew-main-input" class="d-flex flex-row input-inactive-border search_box">
+            <input id="main-input" class="main-input form-control form-control-lg" type="text" placeholder="Тыкайте сюда, не бойтесь">
+            <div class="d-flex align-self-center py-3 px-1" data-toggle="popover" data-content='<div class="text-center">Очистить поле поискового запроса.</div>'><i id="searchInput-clear" class="fa-solid fa-xmark fa-2xl mx-2 align-self-center text-secondary"></i>
+            </div>
+            <div class="d-flex align-self-center py-3 px-1" data-toggle="popover" data-content='<div class="text-center">Настройка текущего поиска. Можно выбрать поиск как по всем разделам Портала, так и по какому-то отдельному.</div>'>
+                <i id="searchInput-settings" class="fa-solid fa-gear fa-2xl mx-2 align-self-center text-secondary"></i>
+            </div>
+            <div class="d-flex align-self-center py-3 px-1" data-toggle="popover" data-content='<div class="text-center">Нажмите, если хотите узнать как работает посик по сервисам Портала и как им правильно пользоваться.</div>'>
+                <i id="searchInput-help" class="fa-solid fa-question fa-2xl ml-2 mr-3 align-self-center text-secondary"></i>
+            </div>
         </div>
-        <div class="d-flex align-self-center py-3 px-1" data-toggle="popover" data-content='<div class="text-center">Нажмите, если хотите узнать как работает посик по сервисам Портала и как им правильно пользоваться.</div>'>
-            <i id="searchInput-help" class="fa-solid fa-question fa-2xl ml-2 mr-3 align-self-center text-secondary"></i>
-        </div>
+        <div class="" style="color:#F3AD2E; font-size:0.85rem; margin-left:1rem">Для поиска сотрудников в начале запроса
+            вводим @</div>
+        <div id="search_box-result"></div>
     </div>
 
 
@@ -213,21 +259,44 @@
             getUserRestrictions('dognet');
         });
 
-
-
         //
+        var $result = $('#search_box-result');
         $('#main-input').keyup(delay(function(e) {
             var query = $(this).val();
             $('#searchInput-help').removeClass('fa-bounce');
-            if (e.keyCode === 13 && query !== "") {
+            if (e.keyCode === 13 && query !== "" && Array.from(query)[0] !== "@") {
                 e.preventDefault();
                 filter_all = $('input[id="searchSwitch-all"]').is(':checked') ? 1 : 0;
                 filter_mail = $('input[id="searchSwitch-mail"]').is(':checked') ? 1 : 0;
                 filter_dog = $('input[id="searchSwitch-dog"]').is(':checked') ? 1 : 0;
                 console.log('search settings!', filter_all, filter_mail, filter_dog)
                 ajaxRequest_searchString(query, filter_all, filter_mail, filter_dog, 'searchString');
+            } else if (Array.from(query)[0] === "@") {
+                console.log(query);
+                var search = query.slice(1);
+                if ((search != '') && (search.length > 1)) {
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo __ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH; ?>/process/ajaxrequests/ajaxReq-liveSearchUser.php",
+                        data: {
+                            'search': search
+                        },
+                        success: function(msg) {
+                            $result.html(msg);
+                            if (msg != '') {
+                                $result.fadeIn();
+                            } else {
+                                $result.fadeOut(100);
+                            }
+                        }
+                    });
+                } else {
+                    $result.html('');
+                    $result.fadeOut(100);
+                }
             }
         }, 500));
+
 
         $('#portalnew-main-center-icons div[data-toggle="popover"]').popover({
             html: true,
@@ -235,6 +304,25 @@
             placement: 'top',
         })
 
+    });
+    $(document).ready(function() {
+        var $result = $('#search_box-result');
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.search_box').length) {
+                $result.html('');
+                $result.fadeOut(100);
+            }
+        });
 
+        $(document).on('click', '.search_result-name a', function() {
+            $('#main-input').val($(this).text());
+            $result.fadeOut(100);
+            return false;
+        });
+
+        $(document).on('click', '#searchInput-clear, #searchInput-settings, #searchInput-help', function(e) {
+            $result.html('');
+            $result.fadeOut(100);
+        });
     });
 </script>
