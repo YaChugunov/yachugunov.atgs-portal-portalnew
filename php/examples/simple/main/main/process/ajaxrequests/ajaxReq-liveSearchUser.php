@@ -18,10 +18,10 @@ require(__DIR_ASSETS . '/functions/func.adminize.inc.php');
 
 if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
     if (checkUserAuthorization($_SESSION['login'], $_SESSION['password']) == -1) { ?>
-        <div class="d-flex flex-row mb-1 row-item">
-            <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Поиск невозможен...</div>
-        </div>
-        <?php
+<div class="d-flex flex-row mb-1 row-item">
+    <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Поиск невозможен...</div>
+</div>
+<?php
     } else {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['search'])) {
 
@@ -32,16 +32,18 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
             $_QRY = mysqlQuery("SELECT * FROM ism_spstaff WHERE (lastname LIKE '{$search}%' OR firstname LIKE '{$search}%' OR middlename LIKE '{$search}%' OR cont_email LIKE '%{$search}%') AND status='1' ORDER BY lastname ASC");
             if (mysqli_num_rows($_QRY) > 0) {
         ?>
-                <div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex flex-row mb-1 row-title">
-                            <div class="search_result-name title" style="width:24%">Фамилия Имя Отчество</div>
-                            <div class="search_result-tel title" style="width:10%">Вн. номер</div>
-                            <div class="search_result-mob title" style="width:15%">Сотовый телефон</div>
-                            <div class="search_result-email title" style="width:15%">Рабочая почта</div>
-                            <div class="search_result-dolj title" style="width:36%">Должность</div>
-                        </div>
-                        <?php
+<div class="search_result shadow-sm p-3 bg-white rounded">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row mb-1 row-title">
+            <div class="search_result-num title" style="width:3%">#</div>
+            <div class="search_result-name title" style="width:24%">Фамилия Имя Отчество</div>
+            <div class="search_result-tel title" style="width:10%">Вн. номер</div>
+            <div class="search_result-mob title" style="width:15%">Сотовый телефон</div>
+            <div class="search_result-email title" style="width:15%">Рабочая почта</div>
+            <div class="search_result-dolj title" style="width:33%">Должность</div>
+        </div>
+        <?php
+                        $num = 1;
                         while ($_ROW = mysqli_fetch_assoc($_QRY)) {
                             $userID         = !empty($_ROW['id']) ? $_ROW['id'] : "";
                             $koddoljprof    = !empty($_ROW['koddoljprof']) ? $_ROW['koddoljprof'] : "";
@@ -62,50 +64,55 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                             $podr       = !empty($_QRY3['namepodroffice']) ? $_QRY3['namepodroffice'] : '<span style="color:#CCCCCC">не указан</span>';
                             $dolj       = !empty($_QRY2['namedoljprof']) ? $_QRY2['namedoljprof'] : '<span style="color:#CCCCCC">не указан</span>';
                         ?>
-                            <div class="d-flex flex-row mb-1 row-item">
-                                <div class="search_result-name" style="width:24%">
-                                    <?php echo $lastname . " " . $firstname . " " . $middlename; ?></div>
-                                <div class="search_result-tel" style="width:10%">
-                                    <?php echo $tel1 . $tel2; ?></div>
-                                <div class="search_result-mob" style="width:15%">
-                                    <?php echo $tel3; ?></div>
-                                <div class="search_result-email" style="width:15%">
-                                    <?php echo $email; ?></div>
-                                <div class="search_result-email" style="width:36%">
-                                    <?php echo $dolj; ?></div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php
+        <div class="d-flex flex-row mb-1 row-item">
+            <div class="search_result-num" style="width:3%">
+                <?php echo $num; ?></div>
+            <div class="search_result-name" style="width:24%">
+                <?php echo $lastname . " " . $firstname . " " . $middlename; ?></div>
+            <div class="search_result-tel" style="width:10%">
+                <?php echo $tel1 . $tel2; ?></div>
+            <div class="search_result-mob" style="width:15%">
+                <?php echo $tel3; ?></div>
+            <div class="search_result-email" style="width:15%">
+                <?php echo $email; ?></div>
+            <div class="search_result-email" style="width:33%">
+                <?php echo $dolj; ?></div>
+        </div>
+        <?php
+                            $num++;
+                        }
+                        ?>
+    </div>
+</div>
+<?php
             } else { ?>
-                <div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex flex-row mb-1 row-item">
-                            <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Ничего не найдено...</div>
-                        </div>
-                    </div>
-                </div>
-            <?php
+<div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row mb-1 row-item">
+            <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Ничего не найдено...</div>
+        </div>
+    </div>
+</div>
+<?php
             }
         } else { ?>
-            <div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
-                <div class="d-flex flex-column">
-                    <div class="d-flex flex-row mb-1 row-item">
-                        <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Поиск невозможен...</div>
-                    </div>
-                </div>
-            </div>
-    <?php
+<div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row mb-1 row-item">
+            <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Поиск невозможен...</div>
+        </div>
+    </div>
+</div>
+<?php
         }
     }
 } else { ?>
-    <div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
-        <div class="d-flex flex-column">
-            <div class="d-flex flex-row mb-1 row-item">
-                <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Поиск невозможен...</div>
-            </div>
+<div class="search_result shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row mb-1 row-item">
+            <div class="search_result-name text-center" style="width:100%; color:#CCCCCC">Поиск невозможен...</div>
         </div>
     </div>
+</div>
 <?php
 }

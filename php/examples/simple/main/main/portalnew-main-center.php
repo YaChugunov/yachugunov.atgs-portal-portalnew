@@ -104,6 +104,7 @@ function ajaxRequest_liveSearchUser(strSearch, responseHandler) {}
 #search_box-result {
     position: relative;
     margin: 0 1rem;
+    z-index: 9999;
 }
 
 /* Стили для плашки с результатами */
@@ -118,6 +119,11 @@ function ajaxRequest_liveSearchUser(strSearch, responseHandler) {}
     background: #fff;
     margin-top: 0.35rem;
     width: 100%;
+    height: auto;
+    max-height: 287px;
+    scrollbar-width: thin;
+    scrollbar-color: #4d4d4d #ffffff;
+    overflow-y: auto !important;
 }
 
 .search_result .title {
@@ -305,17 +311,17 @@ $(window).on("load", function() {
                         if (msg != '') {
                             $result.fadeIn();
                         } else {
-                            $result.fadeOut(100);
+                            $result.fadeOut();
                         }
                     }
                 });
             } else {
                 $result.html('');
-                $result.fadeOut(100);
+                $result.fadeOut();
             }
         } else if (query === "") {
             $result.html('');
-            $result.fadeOut(100);
+            $result.fadeOut();
         }
     }, 500));
 
