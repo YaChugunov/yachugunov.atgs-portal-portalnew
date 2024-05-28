@@ -29,6 +29,9 @@ $emaildinner = isset($_POST['emaildinner']) ? $_POST['emaildinner'] : "";
 $mailingenbl = (isset($_POST['mailingenbl']) && $_POST['mailingenbl']) ? "1" : "0";
 
 $sendmailenbl = $_POST['sendmailenbl'];
+
+$hremail = $_POST['hremail'];
+$hrmobiletel = $_POST['hrmobiletel'];
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 # 
 
@@ -99,6 +102,18 @@ if ($_QRY5) {
 	$output4 = "-1";
 }
 
+# --- - --- - --- - --- - --- - --- - --- - --- - --- - --- - --- - ---
+// Обновляем контакты в таблицах сервиса HR
+$_qryREQ = mysqli_fetch_assoc(mysqlQuery("SELECT * FROM ism_spstaff WHERE id='{$userID}'"));
+$kodwoker = !empty($_qryREQ['kodwoker']) ? $_qryREQ['kodwoker'] : "";
+$_QRY6 = mysqlQuery(" UPDATE hr_wokermaindata SET wokermail = '$hremail', telmobiloffice = '$hrmobiletel' WHERE kodwoker ='{$kodwoker}' ");
+#
+if ($_QRY6) {
+	$output5 = "1";
+} else {
+	$output5 = "-1";
+}
+
 
 if ($sendmailenbl == 1) {
 	# Отправляем уведомление на email с новым логином и паролем
@@ -106,4 +121,4 @@ if ($sendmailenbl == 1) {
 }
 $userpass = "";
 
-echo $output1 . " | " . $output2 . " | " . $output3 . " | " . $output4;
+echo $output1 . " | " . $output2 . " | " . $output3 . " | " . $output4 . " | " . $output5;

@@ -63,6 +63,8 @@
             var hr_dolj = hr_params[0];
             var hr_office = hr_params[1];
             var hr_kodwoker = hr_params[2];
+            var hr_tel = hr_params[3];
+            var hr_email = hr_params[4];
             // 
             var ism_params = x4.split('///');
             var ism_dolj = ism_params[0];
@@ -105,6 +107,10 @@
                 $('#profile-tel').val(profile_tel1);
                 $('#profile-worktel').val(profile_tel2);
                 $('#profile-workdoptel').val(profile_tel3);
+
+                $('#profile-telhr').val(hr_tel);
+                $('#profile-emailhr').val(hr_email);
+
                 $('div.card img').attr('src', host + '/' + profile_avatar);
                 $('div.card-header > span > a.link1').attr('href', host +
                     '/hr/hr-docview.php?docview_type=details&uniqueID=' + hr_kodwoker);
@@ -135,7 +141,7 @@
             } else {
                 $('#profile-login').val('');
                 $('#profile-emailcorp').val('');
-                $('#profile-emailcorp').val('');
+                $('#profile-emaildop').val('');
                 $('#profile-tel').val('');
                 $('#profile-worktel').val('');
                 $('#profile-workdoptel').val('');
@@ -146,6 +152,9 @@
                 $('#dinner-login').val('');
                 $('#dinner-limit').html('XXX');
                 $('#dinner-email').html('???');
+
+                $('#profile-emailhr').val('');
+                $('#profile-telhr').val('');
             }
         });
         // Callback handler that will be called on failure
@@ -170,6 +179,8 @@
         emaildinner,
         mailingenbl,
         sendmailenbl,
+        hrmobiletel,
+        hremail,
         responseHandler) {
         var response_saveProfileData = false;
 
@@ -194,7 +205,10 @@
                 workdoptel: workdoptel,
                 emaildinner: emaildinner,
                 mailingenbl: mailingenbl,
-                sendmailenbl: sendmailenbl
+                sendmailenbl: sendmailenbl,
+                hrmobiletel: hrmobiletel,
+                hremail: hremail,
+
             },
             success: reqField_saveProfileData[responseHandler]
         });
@@ -366,12 +380,22 @@
         <h3 class="mb-3 title">Дополнительные контакты</h3>
         <label for="profile-tel">Мобильный телефон</label>
         <div class="input-group mb-3">
-            <input id="profile-tel" type="tel" class="form-control" pattern="{1}[0-9]{1,3} [0-9]{11,14}" placeholder="" data-inputmask="'mask': '8 (999) 999 9999'" aria-describedby="profile-tel">
+            <input id="profile-tel" type="tel" class="form-control" pattern="{1}[0-9]{1,3} [0-9]{11,14}" placeholder="" data-inputmask="'mask': '8 (999) 9999999'" aria-describedby="profile-tel">
         </div>
 
         <label for="profile-emaildop">Дополнительный email</label>
         <div class="input-group mb-3">
             <input id="profile-emaildop" type="text" class="form-control" placeholder="name@example.com" data-inputmask="'alias': 'email'" aria-describedby="profile-emaildop">
+        </div>
+        <h3 class="mb-3 title">Контакты в сервисе Кадры</h3>
+        <label for="profile-telhr">Контактный телефон</label>
+        <div class="input-group mb-3">
+            <input id="profile-telhr" type="tel" class="form-control" pattern="{1}[0-9]{1,3} [0-9]{11,14}" placeholder="" data-inputmask="'mask': '8 (999) 9999999'" aria-describedby="profile-telhr">
+        </div>
+
+        <label for="profile-emailhr">Контактный email</label>
+        <div class="input-group mb-3">
+            <input id="profile-emailhr" type="text" class="form-control" placeholder="name@example.com" data-inputmask="'alias': 'email'" aria-describedby="profile-emailhr">
         </div>
     </div>
 </div>

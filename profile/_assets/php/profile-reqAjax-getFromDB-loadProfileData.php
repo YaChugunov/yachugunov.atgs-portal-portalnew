@@ -42,14 +42,18 @@ if ($_QRY2) {
 
 // --- --- --- --- ---
 
-$_QRY3 = mysqlQuery(" SELECT namedoljtmp, namepodroffice, kodwoker FROM hr_docwokerproftmp WHERE userid ='" . $userID . "'");
+$_QRY3 = mysqlQuery(" SELECT namedoljtmp, namepodroffice, kodwoker FROM hr_docwokerproftmp WHERE userid ='" . $userID . "' ");
 $_ROW3 = mysqli_fetch_array($_QRY3);
+$kodwoker = !empty($_ROW3['kodwoker']) ? $_ROW3['kodwoker'] : "";
+$_QRY31 = mysqlQuery(" SELECT telmobiloffice, wokermail FROM hr_wokermaindata WHERE kodwoker ='" . $kodwoker . "' ");
+$_ROW31 = mysqli_fetch_array($_QRY31);
 
 if ($_QRY3) {
-	$output3 = $_ROW3['namedoljtmp'] . "///" . $_ROW3['namepodroffice'] . "///" . $_ROW3['kodwoker'];
+	$output3 = $_ROW3['namedoljtmp'] . "///" . $_ROW3['namepodroffice'] . "///" . $_ROW3['kodwoker'] . "///" . $_ROW31['telmobiloffice'] . "///" . $_ROW31['wokermail'];
 } else {
 	$output3 = "-1";
 }
+
 
 // --- --- --- --- ---
 

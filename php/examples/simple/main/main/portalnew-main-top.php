@@ -2,6 +2,11 @@
 #
 # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 #
+if ($use_lightTheme === '1') {
+    $footerLogo_filename = "portalnew-footerLogo-1.png";
+} else {
+    $footerLogo_filename = "portalnew-footerLogo-1-inverse.png";
+}
 ?>
 <script type="text/javascript" language="javascript" class="init">
 $(document).ready(function() {
@@ -509,6 +514,38 @@ $(document).ready(function() {
 .marquee__item span.item__el4 {
     margin-left: 1rem;
 }
+
+.alert-admin-msg {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.alert-admin-msg .body {}
+
+.alert-admin-msg p {
+    font-family: 'HeliosCond', sans-serif;
+    line-height: 1.55rem;
+    margin-bottom: 0;
+}
+
+.alert-admin-msg p span {
+    background-color: #DC3545;
+    padding: 0 0.15rem;
+}
+
+.alert-admin-msg p.text {
+    color: #FFFFFF !important;
+    font-size: 1.25rem;
+}
+
+.alert-admin-msg p.sign {
+    color: #DC3545 !important;
+    font-size: 1.0rem;
+    text-align: right;
+}
 </style>
 
 <div id="portalnew-main-top-blocks" class="d-flex flex-column">
@@ -522,9 +559,20 @@ $(document).ready(function() {
             <div aria-hidden="true" class="marquee__content"></div>
         </div>
     </div>
-    <!-- <div class="d-flex flex-row justify-content-center" style="width:100%">
-        <img src="<?php echo __ROOT . __SERVICENAME_PORTALNEW . '/_assets/images/banners/banner-crocus-22032024-1.jpg'; ?>" class="img-fluid mx-auto mb-3 border-dark rounded-lg">
-    </div> -->
+    <?php if ((checkIsItSuperadmin_defaultDB($_SESSION['id']) == 1 && __ADMSETTINGS_MSG_TEST) || __ADMSETTINGS_MSG_SHOW) {
+    ?>
+    <div class="d-flex flex-row justify-content-center alert-admin-msg" style="width:100%">
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/_assets/images/avatars/users/999-avatar-1.jpg"
+             class="align-self-center mr-3 rounded-circle" width="64" alt=""
+             title="Ярослав Чугунов, администратор Портала">
+        <div class="body">
+            <p class="text"><span>Коллеги!</span><br><span><?php echo __ADMSETTINGS_MSG_TEXT; ?></span></p>
+        </div>
+
+        <!-- <img src="<?php echo __ROOT . __SERVICENAME_PORTALNEW . '/_assets/images/banners/banner-crocus-22032024-1.jpg'; ?>" class="img-fluid mx-auto mb-3 border-dark rounded-lg"> -->
+    </div>
+    <?php }
+    ?>
     <div class="d-flex flex-row justify-content-center">
         <div id="portalnew-main-top-block-1" class="card border-transparent mb-3 mx-2 corner-box corner-box-topC"
              style="min-width:75%; height:15rem">
