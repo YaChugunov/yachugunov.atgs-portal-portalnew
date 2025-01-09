@@ -1,7 +1,7 @@
 {
 	"[php]": {
 		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+		"editor.defaultFormatter": "kokororin.vscode-phpfmt"
 	},
 	"editor.fontSize": 14,
 	"editor.tabSize": 4,
@@ -13,4 +13,9 @@
 	"prettier.tabWidth": 4,
 	"auto-close-tag.insertSpaceBeforeSelfClosingTag": true,
 	"editor.cursorStyle": "underline",
+	"stylelint.snippet": [
+		"css",
+		"postcss",
+		"javascript"
+	],
 }

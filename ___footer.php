@@ -8,12 +8,12 @@
 /**
  * * Выбираем тему оформления
  * @param use_lightTheme = 1 Активна светлая тема оформления
- * @param use_lightTheme = 0 Активна темная тема оформления (по умолчанию) 
- * 
+ * @param use_lightTheme = 0 Активна темная тема оформления (по умолчанию)
+ *
  */
 if ($use_lightTheme === '1') {
     $footerLogo_filename = "portalnew-footerLogo-1.png";
-?>
+    ?>
 <style>
 #footer {
     font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
@@ -84,7 +84,7 @@ if ($use_lightTheme === '1') {
 <?php
 } else {
     $footerLogo_filename = "portalnew-footerLogo-1-inverse.png";
-?>
+    ?>
 <style>
 #footer {
     font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
@@ -169,7 +169,7 @@ if ($use_lightTheme === '1') {
                                href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/mailnew/index.php?type=main"
                                title="Почта">Почта</a></p>
                         <p class="section-text"><a
-                               href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sp/index.php?type=main"
+                               href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sp/index.php?type=staff&mode=main"
                                title="Новый справочник 2023">Справочник</a></p>
                         <h3 class="section-title mt-3 mb-3">Старые сервисы</h3>
                         <p class="section-text"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet"
@@ -209,23 +209,30 @@ if ($use_lightTheme === '1') {
                         <p class="section-text"><a href="https://www.atgs.ru" title="Сайт АТГС" target="_blank">Сайт
                                 АТГС</a></p>
                     </div>
+                    <div class="d-flex flex-column mr-5">
+                        <h3 class="section-title mb-3">Телеграм-боты</h3>
+                        <p class="section-text"><a href="https://t.me/atgsdinner_bot"
+                               target="_blank">@atgsdinner_bot</a> (заказ обедов)</p>
+                        <p class="section-text"><a href="https://t.me/atgsportal_bot"
+                               target="_blank">@atgsportal_bot</a> (официальный бот)</p>
+                    </div>
                 </div>
             </div>
             <div class="col-copyright col-2 d-flex flex-column justify-content-end">
-                <div class="mt-auto">
+                <div class="mb-auto">
                     <p class="section-text"><a
                            href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/?mode=changeslog">История
                             изменений и
                             обновлений</a></p>
-                </div>
-                <div class="small-text version mb-auto">
-                    <?php echo getServiceVersion('portal'); ?>
+                    <div class="small-text version">
+                        <?php echo getServiceVersion('portal'); ?>
+                    </div>
                 </div>
                 <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/_assets/images/<?php echo $footerLogo_filename; ?>"
                      class="mx-auto d-block mb-1 w-25 rounded-circle footer-logo">
                 <div class="small-text devcomp">Корпоративные web-сервисы<sup>&copy;</sup></div>
                 <div class="small-text devname mt-1">Ярослав Чугунов</div>
-                <div class="small-text devname">2017-2023</div>
+                <div class="small-text devname">2017-<?php echo date("Y"); ?></div>
             </div>
             <div class="col text-right">
                 <div class="d-flex flex-row justify-content-end">
@@ -256,6 +263,8 @@ if ($use_lightTheme === '1') {
                                 Telegram
                             </p>
                             <p class="section-text">8 495 660 0802 (513)</p>
+                            <p class="section-text"><a href="https://t.me/atgsportal_bot"
+                                   target="_blank">@atgsportal_bot</a></p>
                         </div>
                         <h3 class="section-title mt-3 mb-3">Социальные сети</h3>
                         <p class="section-text"><a href="https://vk.com/atgsportal" target="_blank">VK-сообщество</a>
@@ -382,9 +391,9 @@ $(window).on("load", function() {
             });
     });
 
-    $('#portalnew-navbar h1.service-title').html("Новый портал");
+    $('#portalnew-navbar h1.service-title').html("Портал");
     $('#portalnew-navbar h3.service-subtitle').html(
-        'Корпоративные web-сервисы для АО "АтлантикТрансгазСистема"');
+        'Корпоративные web-сервисы АО "АТГС"');
 
 });
 </script>

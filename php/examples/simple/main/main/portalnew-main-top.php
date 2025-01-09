@@ -1,6 +1,6 @@
 <?php
 #
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 #
 if ($use_lightTheme === '1') {
     $footerLogo_filename = "portalnew-footerLogo-1.png";
@@ -390,7 +390,7 @@ $(document).ready(function() {
 }
 
 #portalmain-syslog>tbody>tr>td:first-child {
-    width: 12%;
+    width: 9%;
     text-align: left;
 }
 
@@ -400,7 +400,7 @@ $(document).ready(function() {
 }
 
 #portalmain-syslog>tbody>tr>td:nth-child(3) {
-    width: 18%;
+    width: 15%;
     text-align: left;
 }
 
@@ -571,16 +571,18 @@ $(document).ready(function() {
 
         <!-- <img src="<?php echo __ROOT . __SERVICENAME_PORTALNEW . '/_assets/images/banners/banner-crocus-22032024-1.jpg'; ?>" class="img-fluid mx-auto mb-3 border-dark rounded-lg"> -->
     </div>
-    <?php }
-    ?>
+    <?php
+
+}
+?>
     <div class="d-flex flex-row justify-content-center">
         <div id="portalnew-main-top-block-1" class="card border-transparent mb-3 mx-2 corner-box corner-box-topC"
-             style="min-width:75%; height:15rem">
+             style="min-width:100%; height:15rem">
             <div
                  class="card-body text-secondary corner-textbox d-flex flex-column align-items-center justify-content-top h-100">
 
                 <h5 class="<?php echo $cardTitle_H5_class; ?>" data-toggle="popover"
-                    data-content="<div class='text-center w-100'>Активность пользователей в Портале с 8:00 до конца текущего дня. На текущий момент отображаются НЕ ВСЕ операции пользователей, но большая их часть.</div>">
+                    data-content="<div class='text-center w-100'>Активность пользователей в Портале с 8:00 предыдущего до конца текущего дня. На текущий момент отображаются НЕ ВСЕ операции пользователей, но большая их часть.</div>">
                     Портал.Live<sup><i class="fa-regular fa-circle-dot fa-beat-fade fa-xs ml-1"
                            style="color:red"></i></sup>
                 </h5>
@@ -601,31 +603,142 @@ $(document).ready(function() {
                 </div>
             </div>
         </div>
-        <div class="card border-transparent mb-3 mx-2 corner-box corner-box-topC" style="min-width:25%; height:15rem">
+    </div>
+    <div id="portalmain-blocks" class="d-flex flex-row justify-content-center">
+        <div class="card border-transparent mb-3 corner-box corner-box-topC box-1" style="min-width:33%; height:auto">
             <div
                  class="card-body text-secondary corner-textbox d-flex flex-column align-items-center justify-content-top h-100">
                 <h5 class="<?php echo $cardTitle_H5_class; ?>" data-toggle="popover"
                     data-content="<div class='text-center w-100'>Принятые и уволенные за последние 14 дней по данным сервиса Кадры.</div>">
                     Кадровый вопрос</h5>
-                <div id="portalmain-staffNews" class="card-text text-center align-self-center mb-0 pr-1"
+                <div id="portalmain-staffNews" class="card-text mb-0 w-100" style="overflow-y:auto !important">
+                    <div class="staffPersons-result"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-transparent mb-3 mx-2 corner-box corner-box-topC box-2"
+             style="min-width:34%; height:auto">
+            <div
+                 class="card-body text-secondary corner-textbox d-flex flex-column align-items-center justify-content-top h-100">
+                <h5 class="<?php echo $cardTitle_H5_class; ?>" data-toggle="popover"
+                    data-content="<div class='text-center w-100'>Не забудьте поздравить коллег, у которых в ближайшие 3 дня ожидается День Рождения.</div>">
+                    Дни рождения</h5>
+                <div id="portalmain-staffBirthdays" class="card-text mb-0 w-100" style="overflow-y:auto !important">
+                    <div id="staffBirthdays-out"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-transparent mb-3 corner-box corner-box-topC box-3" style="min-width:33%; height:auto">
+            <div id="portalmain-workStatus"
+                 class="card-body text-secondary corner-textbox d-flex flex-column align-items-center justify-content-top h-100">
+                <div class="d-flex flex-column">
+                    <h5 class="<?php echo $cardTitle_H5_class; ?>"><span data-toggle="popover"
+                              data-content="<div class='text-center w-100'>Коллеги, не работающие по причине отпуска, больничного или иных объективных причин, а также находящиеся в командировке или на дистанционном формате работы. Данные вводятся самими сотрудниками через телеграм-бот Портала или через форму в самом Портале.</div>">Рабочий
+                            статус</span></h5>
+                    <div class="enlarged-state-msg <?php echo ($use_lightTheme === '1') ? 'text-dark' : 'text-light'; ?>"
+                         style="position:relative; top:-1.5rem; font-size:0.7rem; line-height:1rem;"></div>
+                </div>
+                <div id="portalmain-staffAbsence" class="card-text mb-0 w-100 d-flex flex-column"
                      style="overflow-y:auto !important">
-                    <div class="staffPersons-in mb-3"></div>
-                    <div class="staffPersons-out"></div>
-                    <div class="staffPersons-noresults"></div>
+                    <div class="staffAbsence-out d-flex flex-column"></div>
+                </div>
+                <div class="mt-auto d-flex flex-row align-items-end" style="position:absolute;bottom:10px;right:30px;">
+                    <a href="https://t.me/atgsportal_bot" target="_blank">
+                        <div class="workstatus-btn mx-1 p-2" style="display:none" data-toggle="popover"
+                             data-content="<div class='text-center w-100'>Сообщить о своем рабочем статусе через телеграм-бот Портала</div>">
+                            <i class="fa-brands fa-telegram fa-lg"></i>
+                        </div>
+                    </a>
+                    <div class="workstatus-btn btn2 mx-1 p-2" style="display:none" data-toggle="popover"
+                         data-content="<div class='text-center w-100'>Сообщить о своем рабочем статусе через форму Портала</div>">
+                        <i class="fa-solid fa-plus fa-lg"></i>
+                    </div>
+                    <div class="workstatus-btn btn3 mx-1 p-2 enlarge" style="display:none" data-toggle="popover"
+                         data-content="<div class='text-center w-100'>Увеличить/уменьшить размер блока</div>">
+                        <i class="fa-solid fa-expand fa-lg"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-$('#exampleModal').on('show.bs.modal', event => {
-    var button = $(event.relatedTarget);
-    var modal = $(this);
-    // Use above variables to manipulate the DOM
 
-});
-</script>
+<style>
+/* hide scrollbar but allow scrolling */
+#startPopupMsg-modal .modal-body {
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+    /* for Firefox */
+    overflow-y: scroll;
+}
+
+#startPopupMsg-modal .modal-body::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
+}
+
+#startPopupMsg-modal .modal-body {}
+</style>
+
+<?php
+if ($_SESSION['id'] != '999' && $_SESSION['login'] != 'yachugunov') {
+    include $_SERVER['DOCUMENT_ROOT'] . "/portalnew/php/examples/simple/updates/updates.php";
+} else {
+    include $_SERVER['DOCUMENT_ROOT'] . "/portalnew/php/examples/simple/updates/updates-test.php";
+}
+?>
+
+
+
+<!-- <div id="startPopupMsg-modal" class="modal fade" tabindex="-1" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body" style="min-height:5rem; height:35rem">
+                <div class="msg-content"></div>
+            </div>
+            <div class="modal-footer border-top-0 justify-content-center">
+                <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div> -->
 
 <script type="text/javascript" language="javascript" class="init">
-$(document).ready(function() {});
+$(window).on("load", function() {
+
+    // $('#startPopupMsg-modal .modal-body .msg-content').empty();
+    // $('#startPopupMsg-modal .modal-body .msg-content').fadeIn("slow", function() {
+    // // Animation complete
+    //     $(this).load(
+    //         '<?php echo __SERVICENAME_PORTALNEW; ?>/php/examples/simple/main/main/data/startmodalmsg/202412-01.startmodalmsg.html'
+    //     );
+    // })
+
+    // setTimeout(function() {
+    //     $.ajax({
+    //         async: false,
+    //         cache: false,
+    //         type: "post",
+    //         url: "<?php echo __ROOT . __SERVICENAME_PORTALNEW; ?>/php/examples/simple/main/main/process/ajaxrequests/ajaxReq-showStartupModal.php",
+    //         data: {
+    //             msgid: '<?php echo !empty(__STARTUPMODAL_MSGID) ? __STARTUPMODAL_MSGID : ""; ?>'
+    //         },
+    //         success: function(response) {
+    //             result = JSON.parse(response);
+    //             console.log("ajaxReq-showStartupModal", result);
+    //         }
+    //     });
+    // }, 2000);
+
+    // setTimeout(function() {
+    //     $('#startPopupMsg-modal').fadeIn("slow", function() {
+    //         $('#startPopupMsg-modal').modal('show');
+    //     })
+    // }, 2000);
+    // $('#startPopupMsg-modal').on('show.bs.modal', event => {
+    //     var button = $(event.relatedTarget);
+    //     var modal = $(this);
+    // });
+});
 </script>

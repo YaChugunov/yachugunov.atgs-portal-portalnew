@@ -1,8 +1,8 @@
 <?php
-# 
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
-# 
-?>
+#
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+#
+; ?>
 <div id="portalnew-main-bottom-blocks" class="d-flex flex-row justify-content-center mt-5">
     <?php if (__UI_PERSONAL_PORTALNEW_SHOWLEFTBOTTOMBLOCK == '1') { ?>
     <div class="card card-bottom-left d-flex flex-column border-transparent mb-3 mr-2 corner-box corner-box-bottomL"
@@ -26,7 +26,7 @@
     <div class="card border-transparent mb-3 mx-2 corner-box corner-box-icons corner-box-bottomC" style="min-width:50%">
         <div class="card-body d-flex flex-column text-secondary corner-textbox h-100">
             <h5 class="<?php echo $cardTitle_H5_class; ?>">Все сервисы</h5>
-            <div class="d-flex flex-row flex-wrap justify-content-center h-100">
+            <div class="d-flex flex-row flex-wrap justify-content-center align-items-center h-100">
 
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet" class="text-secondary"
@@ -77,7 +77,7 @@
                         <div class="service-title_S text-center">Бланки (ГИП)</div>
                     </a>
                     <?php
-                    } elseif (checkUserRestrictions_defaultDB($_SESSION['id'], 'dognet', 4, 0) == 1) { ?>
+} elseif (checkUserRestrictions_defaultDB($_SESSION['id'], 'dognet', 4, 0) == 1) { ?>
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet/dognet-blankview.php?blankview_type=edit"
                        class="text-secondary" data-toggle="popover"
                        data-content="<div class='text-center'>Открыть сервис обработки заявок на договор (бланков) для ОД</div>">
@@ -169,12 +169,16 @@
     </div>
     <?php if (__UI_PERSONAL_PORTALNEW_SHOWRIGHTBOTTOMBLOCK == '1') { ?>
     <div class="mb-3 ml-2 d-flex flex-column" style="min-width:25%">
-        <div class="card card-bottom-right border-transparent corner-box corner-box-bottomR flex-fill mb-3"
+        <div class="card card-bottom-right border-transparent corner-box corner-box-bottomR h-25 mb-3"
              style="width:100%">
             <div class="d-flex flex-column">
                 <div class="card-body text-secondary corner-textbox">
-                    <h5 class="<?php echo $cardTitle_H5_class; ?>">Дни рождения</h5>
-                    <div id="currentBirthdays" class="d-flex flex-column"></div>
+                    <h5 class="<?php echo $cardTitle_H5_class; ?>">Телеграм-бот Портала</h5>
+                    <div class="d-flex flex-column">
+                        <a class="<?php echo $dinnerOrder_btn_class; ?> mb-3" href="https://t.me/atgsportal_bot"
+                           target="_blank" data-toggle="popover" data-content="Официальный телеграм-бот Портала"
+                           role="button">atgsportal_bot</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -182,7 +186,8 @@
         <!-- <a href="#noanchor" class="" data-toggle="modal" data-target="#modalTelegramBot"><img
                  src="<?php echo __ROOT . __SERVICENAME_PORTALNEW . '/_assets/images/banners/banner-squad-dinner-01.jpg'; ?>"
                  class="img-fluid mx-auto mb-3"></a> -->
-        <div class="card card-bottom-right border-transparent corner-box corner-box-bottomR mt-auto" style="width:100%">
+        <div class="card card-bottom-right border-transparent corner-box corner-box-bottomR h-25 mb-3"
+             style="width:100%">
             <div class="d-flex flex-column">
                 <div class="card-body text-secondary corner-textbox">
                     <div class="card-text text-center align-self-center mb-0">
@@ -191,6 +196,16 @@
                            data-toggle="popover"
                            data-content="<div class='text-center w-100'>Скачать актуальный файл со списком внутренних телефонов и электронной почты сотрудников в офисе в привычном оформлении.</div>">Получить
                             документ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-bottom-right border-transparent corner-box corner-box-bottomR h-50" style="width:100%">
+            <div class="d-flex flex-column">
+                <div class="card-body text-secondary corner-textbox">
+                    <h5 class="<?php echo $cardTitle_H5_class; ?>">Область <?php echo $tmpJoke1; ?></h5>
+                    <div class="d-flex flex-column">
+                        <p class="text-center">Здесь что-то скоро будет...</p>
                     </div>
                 </div>
             </div>
@@ -318,7 +333,8 @@
 $(window).on("load", function() {
 
     ajaxRequest_getCurrentDinner('currentDinner');
-    ajaxRequest_getBirthdays('currenBirthdays');
+    ajaxRequest_getBirthdays('currentBirthdays');
+    ajaxRequest_getWorkStatus('currentAbsence');
 
     $('#portalnew-main-bottom-files div[data-toggle="popover"]').popover({
         html: true,

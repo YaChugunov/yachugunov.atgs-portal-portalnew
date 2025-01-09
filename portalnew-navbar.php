@@ -1,13 +1,13 @@
 <?php
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 #
 #
 $_QRY_USER = mysqli_fetch_array(mysqlQuery(" SELECT * FROM users WHERE login='{$_SESSION['login']}'"));
 #
-# 
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
-# 
+#
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+#
 $_QRY_getUser = mysqlQuery("SELECT * FROM portal_userSettingsUI WHERE id = '{$_SESSION['id']}'");
 if ($_QRY_getUser->num_rows == 0) {
     $searchMail_restr = (checkUserRestrictions($_SESSION['id'], 'mail', 2, 0) == 1) || (checkUserRestrictions($_SESSION['id'], 'mailnew', 2, 0) == 1) ? '1' : '0';
@@ -26,22 +26,22 @@ if ($_QRY_getUser->num_rows == 0) {
     $use_pushMessages = $_ROW_getUser['use_pushMessages'];
     $use_lightTheme = $_ROW_getUser['use_lightTheme'];
 }
-# 
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
-# 
-include(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/php/examples/simple/main/main/common-includes/navbar-side.php');
+#
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+#
+include __DIR_ROOT . __SERVICENAME_PORTALNEW . '/php/examples/simple/main/main/common-includes/navbar-side.php';
 #
 /**
  * * Выбираем тему оформления
  * @param use_lightTheme = 1 Активна светлая тема оформления
- * @param use_lightTheme = 0 Активна темная тема оформления (по умолчанию) 
- * 
+ * @param use_lightTheme = 0 Активна темная тема оформления (по умолчанию)
+ *
  */
 if ($use_lightTheme === '1') {
-    include(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/portalnew-loadCSS-lightTheme.php');
+    include __DIR_ROOT . __SERVICENAME_PORTALNEW . '/portalnew-loadCSS-lightTheme.php';
 } else {
-    include(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/portalnew-loadCSS-darkTheme.php');
+    include __DIR_ROOT . __SERVICENAME_PORTALNEW . '/portalnew-loadCSS-darkTheme.php';
 }
 ?>
 
@@ -51,8 +51,8 @@ if ($use_lightTheme === '1') {
             <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew"
                title="На главную страницу Нового портала"><img
                      src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/_assets/images/portal-main-logo.svg"
-                     class="img logo" alt="Новый портал 2023"></a>
-            <div style="cursor:pointer" onclick="openNav()" class="align-self-center text-secondary ml-3 py-2"
+                     class="img logo" alt="Портал"></a>
+            <div style="cursor:pointer" onclick="openNav()" class="align-self-center text-secondary ml-3 py-2 icons"
                  data-toggle="popover" data-content='<div class="text-center">Боковое меню Портала</div>'><i
                    class="fa-solid fa-bars fa-2xl mr-2"></i></div>
         </div>
@@ -68,26 +68,26 @@ if ($use_lightTheme === '1') {
         </div>
         <div class="col-1 d-flex flex-row justify-content-end my-auto">
             <?php
-            if (checkUserRestrictions_defaultDB($_SESSION['id'], 'portalnew', 2, 0) == 1) {
-            ?>
-            <div id="switchTheme-icon" class="mx-3 py-2 align-self-center" data-toggle="popover"
+if (checkUserRestrictions_defaultDB($_SESSION['id'], 'portalnew', 2, 0) == 1) {
+    ?>
+            <div id="switchTheme-icon" class="mx-3 py-2 align-self-center icons" data-toggle="popover"
                  data-content='<div class="text-center">Переключиться между светлой и темной темами отображения ("темная" - тема по умолчанию)</div>'>
                 <i class="<?php echo $themeIcon_class; ?> fa-2xl text-secondary"></i>
             </div>
-            <div id="listMessages-icon" class="mx-3 py-2 align-self-center" data-toggle="popover"
+            <div id="listMessages-icon" class="mx-3 py-2 align-self-center icons" data-toggle="popover"
                  data-content='<div class="text-center">Уведомления для Вас от сервисов Портала и администратора</div>'>
                 <i class="fa-solid fa-bell fa-2xl text-secondary"></i>
             </div>
-            <div id="userSettings-icon" class="mx-3 py-2 align-self-center" data-toggle="popover"
+            <div id="userSettings-icon" class="mx-3 py-2 align-self-center icons" data-toggle="popover"
                  data-content='<div class="text-center">Ваши персональные настройки интерфейса Почты</div>'>
                 <i class="fa-solid fa-gear fa-2xl text-secondary"></i>
             </div>
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown icons">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"
-                            aria-expanded="false">
-                        <?php echo $_SESSION['lastname']; ?>
-                    </button>
+                            aria-expanded="false"><span>
+                            <?php echo $_SESSION['lastname']; ?>
+                        </span></button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item"
                            href="http://<?php echo $_SERVER['HTTP_HOST'] . __SERVICENAME_PORTALNEW; ?>/?mode=profile&userid=<?php echo $_SESSION['id']; ?>">Профиль
@@ -98,8 +98,8 @@ if ($use_lightTheme === '1') {
                 </div>
             </div>
             <?php
-            }
-            ?>
+}
+?>
             <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/<?php echo $_QRY_USER['avatar']; ?>"
                  class="img logo rounded-circle ml-3">
         </div>

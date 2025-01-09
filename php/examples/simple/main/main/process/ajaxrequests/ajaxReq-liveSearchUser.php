@@ -45,6 +45,7 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                     hr_docwokerproftmp.koddoljprof as koddoljprof, 
                     hr_docwokerproftmp.kodofficework as kodofficework, 
                     hr_docwokerproftmp.namepodroffice as namepodroffice, 
+                    hr_docwokerproftmp.namepodrmainoffice as namepodrmainoffice, 
                     hr_docwokerproftmp.namedoljtmp as namedoljtmp, 
                     ism_spstaff.cont_telint1 as cont_telint1, 
                     ism_spstaff.cont_telint2 as cont_telint2, 
@@ -95,8 +96,12 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
 
                             $_QRY2 = mysqli_fetch_assoc(mysqlQuery("SELECT * FROM hr_spdoljprof WHERE koddoljprof ='{$koddoljprof}' ORDER BY id DESC LIMIT 1"));
                             $kodofficeplace = !empty($_ROW['kodofficework']) ? $_ROW['kodofficework'] : "";
-                            $podr           = !empty($_ROW['namepodroffice']) ? $_ROW['namepodroffice'] : '<span style="color:#CCCCCC">не указан</span>';
-                            $dolj           = !empty($_QRY2['namedoljprof']) ? $_QRY2['namedoljprof'] : '<span style="color:#CCCCCC">не указана</span>';
+                            $podrmain       = !empty($_ROW['namepodrmainoffice']) ? $_ROW['namepodrmainoffice'] : '';
+                            $podr           = !empty($_ROW['namepodroffice']) ? $_ROW['namepodroffice'] : '';
+                            $bull1          = (!empty($_ROW['namepodrmainoffice'])&&!empty($_ROW['namepodroffice'])) ? '&nbsp;&bull;&nbsp;' : '';
+                            $podrStr        = $podrmain . $bull1 . $podr;
+                            $podrStrOut     = !empty($podrStr) ? '<span data-toggle="tooltip" title="'. $podrStr.'" style="float:right"><i class="fa-solid fa-circle-info"></i></span>' : '';
+                            $dolj           = !empty($_QRY2['namedoljprof']) ? '<span style="float:left">'.$_QRY2["namedoljprof"].'</span>'.$podrStrOut : (!empty($podrStr) ? '<span style="float:left; color:#CCCCCC">не указана</span>'. $podrStrOut : '<span style="color:#CCCCCC">не указана</span>');
 
                             $_QRY4 = mysqli_fetch_assoc(mysqlQuery("SELECT * FROM hr_docworkerofficeplace WHERE kodofficeplace ='{$kodofficeplace}' ORDER BY id DESC LIMIT 1"));
                             $location   = !empty($_QRY4['nameshort']) ? $_QRY4['nameshort'] : '<span style="color:#CCCCCC">---</span>';

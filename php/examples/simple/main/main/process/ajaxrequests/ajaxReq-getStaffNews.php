@@ -1,20 +1,20 @@
 <?php
 date_default_timezone_set('Europe/Moscow');
 # Подключаем конфигурационный файл
-require($_SERVER['DOCUMENT_ROOT'] . '/config.inc.php');
+require $_SERVER['DOCUMENT_ROOT'] . '/config.inc.php';
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-require_once(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/config.portal.inc.php');
+require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/config.portal.inc.php';
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 # Подключаемся к базе
-require_once(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/dbconn/db_connection.php');
-require_once(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/dbconn/db_controller.php');
+require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/dbconn/db_connection.php';
+require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/dbconn/db_controller.php';
 $db_handle = new DBController();
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 # Подключаем общие функции безопасности
-require_once(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/functions/func.secure.inc.php');
+require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/functions/func.secure.inc.php';
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 # Подключаем собственные функции сервиса Почта
-require_once(__DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/functions/func.portal.inc.php');
+require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/functions/func.portal.inc.php';
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 # Включаем режим сессии
 // session_start();
@@ -25,12 +25,12 @@ $_monthsList = array(
     ".01." => "января", ".02." => "февраля",
     ".03." => "марта", ".04." => "апреля", ".05." => "мая", ".06." => "июня",
     ".07." => "июля", ".08." => "августа", ".09." => "сентября",
-    ".10." => "октября", ".11." => "ноября", ".12." => "декабря"
+    ".10." => "октября", ".11." => "ноября", ".12." => "декабря",
 );
 // текущая дата
 $currentDate = date("d.m.Y");
 // переменная $currentDate теперь хранит текущую дату в формате 22.07.2015
-// но так как наша задача - вывод русской даты, 
+// но так как наша задача - вывод русской даты,
 // заменяем число месяца на название:
 $_mD = date(".m."); //для замены
 $currentDate = str_replace($_mD, " " . $_monthsList[$_mD] . " ", $currentDate);
@@ -63,25 +63,31 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                     SELECT kodwoker, numberlaborcontract as numdoc, datelaborcontract as datedoc, null, null, null FROM hr_docworkerlaborcontr tb1 WHERE kodwoker='{$_ROW_NewPersons['kodwokerkart']}'"));
 
                     $_QRY_NewInfo2 = mysqli_fetch_assoc(mysqlQuery("
-                    SELECT kodwoker, koddoljprof as koddolj, kodofficework as kodoffice, kodstructpodr as kodstruc, kodrazdid as kodrazd, namedoljtmp as namedolj FROM hr_docwokerproftmp tb2 WHERE kodwoker='{$_ROW_NewPersons['kodwokerkart']}' 
+                    SELECT kodwoker, koddoljprof as koddolj, kodofficework as kodoffice, kodstructpodr as kodstruc, kodrazdidmain as kodrazdmain, kodrazdid as kodrazd, namedoljtmp as namedolj FROM hr_docwokerproftmp tb2 WHERE kodwoker='{$_ROW_NewPersons['kodwokerkart']}'
                     "));
 
                     $_QRY_NewInfo3 = mysqli_fetch_assoc(mysqlQuery("
-                    SELECT nameofficecity as city FROM hr_docworkerofficeplace WHERE kodofficeplace='{$_QRY_NewInfo2['kodoffice']}' 
+                    SELECT nameofficecity as city FROM hr_docworkerofficeplace WHERE kodofficeplace='{$_QRY_NewInfo2['kodoffice']}'
                     "));
 
                     if (!empty($_QRY_NewInfo2['kodrazd'])) {
                         $_QRY_NewInfo4 = mysqli_fetch_assoc(mysqlQuery("
-                    SELECT namerazdshot as nameshort, namerazdfull as namefull FROM hr_sporgschema WHERE kodrazdid ='{$_QRY_NewInfo2['kodrazd']}' 
+                    SELECT namerazdshot as nameshort, namerazdfull as namefull FROM hr_sporgschema WHERE kodrazdid ='{$_QRY_NewInfo2['kodrazd']}'
+                    "));
+                        $_QRY_NewInfo5 = mysqli_fetch_assoc(mysqlQuery("
+                    SELECT namerazdshot as nameshort, namerazdfull as namefull FROM hr_sporgschema_mains WHERE kodrazdid ='{$_QRY_NewInfo2['kodrazdmain']}'
                     "));
                         $namepodr = $_QRY_NewInfo4['nameshort'];
+                        $namepodrmain = $_QRY_NewInfo5['nameshort'];
                     } elseif (!empty($_QRY_NewInfo2['kodstruc'])) {
                         $_QRY_NewInfo4 = mysqli_fetch_assoc(mysqlQuery("
-                        SELECT shortname2 as nameshort FROM ism_spstructpodr WHERE kodstructpodr ='{$_QRY_NewInfo2['kodstruc']}' 
+                        SELECT shortname2 as nameshort FROM ism_spstructpodr WHERE kodstructpodr ='{$_QRY_NewInfo2['kodstruc']}'
                         "));
                         $namepodr = $_QRY_NewInfo4['nameshort'];
+                        $namepodrmain = "";
                     } else {
                         $namepodr = "";
+                        $namepodrmain = "";
                     }
 
                     $personsIn .= $_ROW_NewPersons['wokerendname'] . " " . $_ROW_NewPersons['wokerfistname'] . " " . $_ROW_NewPersons['wokersecondname'];
@@ -92,6 +98,7 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                     $outputArr['in'][$i]['order'] = !empty($_QRY_NewInfo1['numdoc']) ? $_QRY_NewInfo1['numdoc'] : "";
                     $outputArr['in'][$i]['office'] = !empty($_QRY_NewInfo3['city']) ? $_QRY_NewInfo3['city'] : "";
                     $outputArr['in'][$i]['dept'] = $namepodr;
+                    $outputArr['in'][$i]['podrmain'] = $namepodrmain;
                     $outputArr['in'][$i]['dolj'] = !empty($_QRY_NewInfo2['namedolj']) ? $_QRY_NewInfo2['namedolj'] : "";
                     $i++;
                 }
@@ -103,11 +110,11 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                     $_QRY_OutInfo1 = mysqli_fetch_assoc(mysqlQuery("SELECT numberdocworkend as numdoc, datedocworkend as datedoc FROM hr_docworkerworkend WHERE kodwoker='{$_ROW_OutPersons['kodwokerkart']}'"));
 
                     $_QRY_NewInfo2 = mysqli_fetch_assoc(mysqlQuery("
-                    SELECT kodwoker, koddoljprof as koddolj, kodofficework as kodoffice, kodstructpodr as kodstruc, kodrazdid as kodrazd, namedoljtmp as namedolj FROM hr_docwokerproftmp tb2 WHERE kodwoker='{$_ROW_OutPersons['kodwokerkart']}' 
+                    SELECT kodwoker, koddoljprof as koddolj, kodofficework as kodoffice, kodstructpodr as kodstruc, kodrazdid as kodrazd, namedoljtmp as namedolj FROM hr_docwokerproftmp tb2 WHERE kodwoker='{$_ROW_OutPersons['kodwokerkart']}'
                     "));
 
                     $_QRY_NewInfo3 = mysqli_fetch_assoc(mysqlQuery("
-                    SELECT nameofficecity as city FROM hr_docworkerofficeplace WHERE kodofficeplace='{$_QRY_NewInfo2['kodoffice']}' 
+                    SELECT nameofficecity as city FROM hr_docworkerofficeplace WHERE kodofficeplace='{$_QRY_NewInfo2['kodoffice']}'
                     "));
 
                     $personsOut .= $_ROW_OutPersons['wokerendname'] . " " . $_ROW_OutPersons['wokerfistname'] . " " . $_ROW_OutPersons['wokersecondname'];

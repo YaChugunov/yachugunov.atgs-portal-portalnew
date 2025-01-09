@@ -17,8 +17,8 @@
 </div>
 
 <?php
-// if ( ($_GET['userid']==$_SESSION['id']) || (checkIsItSuperadmin($_SESSION['id'])==1) ) {
-if (($_GET['userid'] == $_SESSION['id'])) {
+if ( ($_GET['userid']==$_SESSION['id']) || (checkIsItSuperadmin($_SESSION['id'])==1) ) {
+// if (($_GET['userid'] == $_SESSION['id'])) {
 ?>
 
 <div id="profile-main" class="container mt-5">
