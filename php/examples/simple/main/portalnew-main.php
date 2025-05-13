@@ -1,7 +1,7 @@
 <?php
-#
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-#
+    #
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    #
 ; ?>
 <script type="text/javascript" language="javascript" class="">
 //
@@ -368,7 +368,7 @@ function ajaxRequest_getStaffNews(responseHandler) {
                     '<div class="rounded-circle mr-3">' + reportIcon + '</div>' +
                     '<div class="media-body">' +
                     '<h5 class="mt-0 mb-0">' + arrIn[i].name + '</h5>' +
-                    '<p class="mb-0">Принят приказом № ' + arrIn[i].order + ' от ' + arrIn[i].date + '</p>' +
+                    '<p class="mb-0">Принят ' + arrIn[i].date + '</p>' +
                     '<p class="mb-0">' + arrIn[i].office + podrmain + dept + dolj +
                     '</p>' +
                     '</div></div>';
@@ -386,7 +386,7 @@ function ajaxRequest_getStaffNews(responseHandler) {
                     '<div class="rounded-circle mr-3">' + reportIcon + '</div>' +
                     '<div class="media-body">' +
                     '<h5 class="mt-0 mb-0">' + arrOut[i].name + '</h5>' +
-                    '<p class="mb-0">Уволен приказом № ' + arrOut[i].order + ' от ' + arrOut[i].date + '</p>' +
+                    '<p class="mb-0">Уволен ' + arrOut[i].date + '</p>' +
                     '<p class="mb-0">' + arrOut[i].office + '</p>' +
                     '</div></div>';
             }
@@ -518,52 +518,54 @@ function ajaxRequest_getWorkStatusSave(userid, action, reportid, reporttype, rep
 </style>
 
 <?php if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
-    if (checkUserAuthorization_defaultDB($_SESSION['login'], $_SESSION['password']) == -1) {; // Редирект на главную страницу
+        if (checkUserAuthorization_defaultDB($_SESSION['login'], $_SESSION['password']) == -1) {
+            ; // Редирект на главную страницу
         ?>
 <meta http-equiv="refresh" content="0; url=<?php echo __ROOT; ?>">
 <?php
-} else {
-        // При удачном входе пользователю выдается все, что расположено НИЖЕ звездочек
-        // ************************************************************************************
-        if (!isset($_GET['type']) && empty($_GET['type'])) {
-            if (__UI_PERSONAL_PORTALNEW_SHOWTOPBLOCK == '1') {
-                if (!checkIsItSuperadmin($_SESSION['id']) == 1) {
-                    echo '<div id="portalnew-main-top" class="container-xl mb-3">';
-                    include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-top.php";
+    } else {
+            // При удачном входе пользователю выдается все, что расположено НИЖЕ звездочек
+            // ************************************************************************************
+            if (! isset($_GET['type']) && empty($_GET['type'])) {
+                if (__UI_PERSONAL_PORTALNEW_SHOWTOPBLOCK == '1') {
+                    if (! checkIsItSuperadmin($_SESSION['id']) == 1) {
+                        echo '<div id="portalnew-main-top" class="container-xl mb-3">';
+                        include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-top.php";
+                        echo '</div>';
+                    } else {
+                        echo '<div id="portalnew-main-top" class="container-xl mb-3">';
+                        include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-top_test.php";
+                        echo '</div>';
+                    }
+                }
+                if (! checkIsItSuperadmin($_SESSION['id']) == 1) {
+                    echo '<div id="portalnew-main-center" class="d-flex justify-content-center align-items-center">';
+                    include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-center.php";
                     echo '</div>';
                 } else {
-                    echo '<div id="portalnew-main-top" class="container-xl mb-3">';
-                    include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-top_test.php";
+                    echo '<div id="portalnew-main-center" class="d-flex justify-content-center align-items-center">';
+                    include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-center_test.php";
                     echo '</div>';
                 }
-            }
-            if (!checkIsItSuperadmin($_SESSION['id']) == 1) {
-                echo '<div id="portalnew-main-center" class="d-flex justify-content-center align-items-center">';
-                include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-center.php";
-                echo '</div>';
+                if (! checkIsItSuperadmin($_SESSION['id']) == 1) {
+                    echo '<div id="portalnew-main-bottom" class="container-xl mb-5">';
+                    include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-bottom.php";
+                    echo '</div>';
+                } else {
+                    echo '<div id="portalnew-main-bottom" class="container-xl mb-3">';
+                    include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-bottom_test.php";
+                    echo '</div>';
+                }
+            } elseif (isset($_GET['type']) && ! empty($_GET['type']) && $_GET['type'] == "telegram-feed") {
+                include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_WORKPATH . "/telegram-feed/portalnew-telegram-feed.php";
             } else {
-                echo '<div id="portalnew-main-center" class="d-flex justify-content-center align-items-center">';
-                include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-center_test.php";
-                echo '</div>';
+                include __DIR_ROOT . __SERVICENAME_PORTALNEW . "/php/examples/simple/main/main/common-includes/errpage-wrongurls.php";
             }
-            if (!checkIsItSuperadmin($_SESSION['id']) == 1) {
-                echo '<div id="portalnew-main-bottom" class="container-xl mb-5">';
-                include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-bottom.php";
-                echo '</div>';
-            } else {
-                echo '<div id="portalnew-main-bottom" class="container-xl mb-3">';
-                include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_MAIN_WORKPATH . "/portalnew-main-bottom_test.php";
-                echo '</div>';
-            }
-        } elseif (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == "telegram-feed") {
-            include __DIR_ROOT . __SERVICENAME_PORTALNEW . __PORTAL_MAIN_WORKPATH . "/telegram-feed/portalnew-telegram-feed.php";
-        } else {
-            include __DIR_ROOT . __SERVICENAME_PORTALNEW . "/php/examples/simple/main/main/common-includes/errpage-wrongurls.php";
+            // ************************************************************************************
+            // При удачном входе пользователю выдается все, что расположено ВЫШЕ звездочек
         }
-        // ************************************************************************************
-        // При удачном входе пользователю выдается все, что расположено ВЫШЕ звездочек
-    }
-} else {; # Редирект на главную страницу
+    } else {
+        ; # Редирект на главную страницу
     ?>
 <meta http-equiv="refresh" content="0; url=<?php echo __ROOT; ?>">
 <?php

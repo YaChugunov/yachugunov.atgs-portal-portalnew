@@ -1,16 +1,16 @@
 <?php
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-$navbarTopmain_class = "container-fluid border-bottom border-dark fixed-top";
-$navbarTopmain_style = "margin-bottom:110px";
-$themeIcon_class = "fa-solid fa-circle-half-stroke";
-$cardTitle_H5_class = "card-title mb-4 text-white text-center";
-$cardBody_textColor_class = "text-secondary";
-$dinnerOrder_btn_class = "btn btn-outline-warning btn-lg w-100";
-$getSpTel_btn_class = "btn btn-outline-warning btn-lg w-100";
-$tmpJoke1 = "тьмы";
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    $navbarTopmain_class      = "container-fluid border-bottom border-dark fixed-top";
+    $navbarTopmain_style      = "margin-bottom:110px";
+    $themeIcon_class          = "fa-solid fa-circle-half-stroke";
+    $cardTitle_H5_class       = "card-title mb-4 text-white text-center";
+    $cardBody_textColor_class = "text-secondary";
+    $dinnerOrder_btn_class    = "btn btn-outline-warning btn-lg w-100";
+    $getSpTel_btn_class       = "btn btn-outline-warning btn-lg w-100";
+    $tmpJoke1                 = "тьмы";
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 ?>
 <style>
 #portalnew-navbar .navbar-brand {
@@ -624,6 +624,12 @@ div#switchTheme-icon:hover {
     scrollbar-color: #F3AD2E #222222;
 }
 
+#portalmain-staffNews,
+#portalmain-staffAbsence,
+#portalmain-staffBirthdays {
+    max-height: 250px;
+}
+
 #portalmain-syslog-block::-webkit-scrollbar,
 #portalmain-syslog-block .dataTables_scrollBody::-webkit-scrollbar,
 #portalmain-staffNews::-webkit-scrollbar,
@@ -939,8 +945,8 @@ div#switchTheme-icon:hover {
 }
 </style>
 <?php
-if (__NY_STYLE) {
-    if (checkIsItSuperadmin_defaultDB($_SESSION['id']) == 1) {
+    if (__NY_STYLE) {
+        if (checkIsItSuperadmin_defaultDB($_SESSION['id']) == 1) {
         ?>
 <style>
 #portalnew-navbar {
@@ -1007,7 +1013,7 @@ if (__NY_STYLE) {
 }
 </style>
 <?php
-}
-}
+    }
+    }
 
 ?>

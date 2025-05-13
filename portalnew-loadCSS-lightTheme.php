@@ -1,16 +1,16 @@
 <?php
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-$navbarTopmain_class = "container-fluid fixed-top";
-$navbarTopmain_style = "margin-bottom:110px; border-bottom:1px solid #FFFFFF !important";
-$themeIcon_class = "fa-solid fa-circle-half-stroke";
-$cardTitle_H5_class = "card-title mb-4 text-dark text-center";
-$cardBody_textColor_class = "text-secondary";
-$dinnerOrder_btn_class = "btn btn-info btn-lg w-100";
-$getSpTel_btn_class = "btn btn-info btn-lg w-100";
-$tmpJoke1 = "света";
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    $navbarTopmain_class      = "container-fluid fixed-top";
+    $navbarTopmain_style      = "margin-bottom:110px; border-bottom:1px solid #FFFFFF !important";
+    $themeIcon_class          = "fa-solid fa-circle-half-stroke";
+    $cardTitle_H5_class       = "card-title mb-4 text-dark text-center";
+    $cardBody_textColor_class = "text-secondary";
+    $dinnerOrder_btn_class    = "btn btn-info btn-lg w-100";
+    $getSpTel_btn_class       = "btn btn-info btn-lg w-100";
+    $tmpJoke1                 = "света";
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 ?>
 <link href="http://<?php echo $_SERVER['HTTP_HOST'] . __SERVICENAME_PORTALNEW; ?>/_assets/css/modals.css"
       rel="stylesheet">
@@ -650,12 +650,20 @@ box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 
 #portalmain-syslog-block,
 #portalmain-syslog-block .dataTables_scrollBody,
-#portalmain-staffNews
+#portalmain-staffNews,
+#portalmain-staffAbsence,
+#portalmain-staffBirthdays
 
 /* override x.xhtml.ru style */
     {
     scrollbar-width: thin;
     scrollbar-color: #4D4D4D #DDDDDD;
+}
+
+#portalmain-staffNews,
+#portalmain-staffAbsence,
+#portalmain-staffBirthdays {
+    max-height: 250px;
 }
 
 #portalmain-syslog-block::-webkit-scrollbar,
