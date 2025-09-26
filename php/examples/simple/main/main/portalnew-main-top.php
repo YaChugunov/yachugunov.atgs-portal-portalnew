@@ -609,7 +609,7 @@ $(document).ready(function() {
             <div
                  class="card-body text-secondary corner-textbox d-flex flex-column align-items-center justify-content-top h-100">
                 <h5 class="<?php echo $cardTitle_H5_class; ?>" data-toggle="popover"
-                    data-content="<div class='text-center w-100'>Принятые и уволенные за последние 14 дней по данным сервиса Кадры.</div>">
+                    data-content="<div class='text-center w-100'>Принятые и уволенные за последние 7 дней по данным сервиса Кадры.</div>">
                     Кадровый вопрос</h5>
                 <div id="portalmain-staffNews" class="card-text mb-0 w-100" style="overflow-y:auto !important">
                     <div class="staffPersons-result"></div>
