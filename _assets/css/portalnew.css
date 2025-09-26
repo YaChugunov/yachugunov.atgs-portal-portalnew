@@ -163,8 +163,13 @@
 
 #portalnew-main-bottom-blocks .service-icon,
 #portalnew-main-bottom-files .service-icon {
-    min-width: 32px;
-    min-height: 32px;
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 2rem;
+}
+
+#portalnew-main-bottom-blocks .service-title_S {
+    font-size: 1.15rem;
 }
 
 #portalnew-main-bottom-blocks .service-item a:hover,

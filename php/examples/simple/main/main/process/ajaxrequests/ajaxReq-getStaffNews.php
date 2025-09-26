@@ -55,7 +55,7 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             if ((checkServiceAccess('allservices') == 1 && checkServiceAccess('portalnew') == 1 && checkUserRestrictions($_SESSION['id'], 'portalnew', 2, 0) == 1) or (checkServiceAccess('allservices') == 1 && checkServiceAccess('portalnew') == 0 && checkIsItSuperadmin($_SESSION['id']) == 1) or (checkServiceAccess('allservices') == 0 && checkIsItSuperadmin($_SESSION['id']) == 1)) {
 
-                $_QRY_NewPersons = mysqlQuery("SELECT kodwokerkart, wokerendname, wokerfistname, wokersecondname FROM hr_docwokerkart WHERE kodwokerkart IN (SELECT kodwoker FROM hr_docworkerlaborcontr WHERE datelaborcontract > NOW() - INTERVAL 14 DAY ORDER BY datelaborcontract DESC)");
+                $_QRY_NewPersons = mysqlQuery("SELECT kodwokerkart, wokerendname, wokerfistname, wokersecondname FROM hr_docwokerkart WHERE kodwokerkart IN (SELECT kodwoker FROM hr_docworkerlaborcontr WHERE datelaborcontract > (NOW() - INTERVAL 7 DAY) AND showonmain='1' ORDER BY datelaborcontract DESC)");
                 $personsIn       = "";
                 $i               = 0;
                 $namepodr        = "";
@@ -106,7 +106,7 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                     $i++;
                 }
                 //
-                $_QRY_OutPersons = mysqlQuery("SELECT kodwokerkart, wokerendname, wokerfistname, wokersecondname FROM hr_docwokerkart WHERE kodwokerkart IN (SELECT kodwoker FROM hr_docworkerworkend WHERE datedocworkend > NOW() - INTERVAL 14 DAY ORDER BY datedocworkend DESC)");
+                $_QRY_OutPersons = mysqlQuery("SELECT kodwokerkart, wokerendname, wokerfistname, wokersecondname FROM hr_docwokerkart WHERE kodwokerkart IN (SELECT kodwoker FROM hr_docworkerworkend WHERE datedocworkend > (NOW() - INTERVAL 14 DAY) AND showonmain='1' ORDER BY datedocworkend DESC)");
                 $personsOut      = "";
                 $i               = 0;
                 while ($_ROW_OutPersons = mysqli_fetch_assoc($_QRY_OutPersons)) {

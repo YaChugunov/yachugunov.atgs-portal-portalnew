@@ -1,13 +1,13 @@
 <?php
-#
-# ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-#
+    #
+    # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+    #
 ; ?>
 <div id="portalnew-main-bottom-blocks" class="d-flex flex-row justify-content-center mt-5">
     <?php if (__UI_PERSONAL_PORTALNEW_SHOWLEFTBOTTOMBLOCK == '1') { ?>
     <div class="card card-bottom-left d-flex flex-column border-transparent mb-3 mr-2 corner-box corner-box-bottomL"
          style="min-width:25%">
-        <div class="card-body <?php echo $cardBody_textColor_class; ?> corner-textbox d-flex flex-column">
+        <div class="card-body                              <?php echo $cardBody_textColor_class; ?> corner-textbox d-flex flex-column">
             <div class="flex-fill mb-3">
                 <h5 class="<?php echo $cardTitle_H5_class; ?>">Ваш обед</h5>
                 <div id="currentDinner" class="d-flex flex-column">
@@ -31,7 +31,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet" class="text-secondary"
                        data-toggle="popover" data-content="Открыть сервис Договор">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-file-signature fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Договор</div>
@@ -40,7 +40,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/mailnew/index.php?type=in&mode=thisyear"
                        class="text-secondary" data-toggle="popover" data-content="Открыть входящую почту АТГС">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-envelope-open fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Входящая</div>
@@ -49,7 +49,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/mailnew/index.php?type=out&mode=thisyear"
                        class="text-secondary" data-toggle="popover" data-content="Открыть исходящую почту АТГС">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-envelope fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Иcходящая</div>
@@ -59,7 +59,7 @@
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet/dognet-agreeview.php?docview_type=current"
                        class="text-secondary" data-toggle="popover"
                        data-content="Открыть перечень заключенных соглашений с контрагентами">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-handshake fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Соглашения</div>
@@ -71,17 +71,17 @@
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet/dognet-blankview.php?blankview_type=current"
                        class="text-secondary" data-toggle="popover"
                        data-content="<div class='text-center'>Открыть сервис создания заявок на договор (бланков) для ГИПов</div>">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-list-check fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Бланки (ГИП)</div>
                     </a>
                     <?php
-} elseif (checkUserRestrictions_defaultDB($_SESSION['id'], 'dognet', 4, 0) == 1) { ?>
+                    } elseif (checkUserRestrictions_defaultDB($_SESSION['id'], 'dognet', 4, 0) == 1) { ?>
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet/dognet-blankview.php?blankview_type=edit"
                        class="text-secondary" data-toggle="popover"
                        data-content="<div class='text-center'>Открыть сервис обработки заявок на договор (бланков) для ОД</div>">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-list-check fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Бланки (ОД)</div>
@@ -90,7 +90,7 @@
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet/dognet-blankview.php?blankview_type=edit"
                        class="text-secondary" data-toggle="popover"
                        data-content="<div class='text-center'>Сервис заявок на договор (бланков)</div>">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-list-check fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Бланки</div>
@@ -101,7 +101,7 @@
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dognet/dognet-zayvview.php?zayvview_type=current"
                        class="text-secondary" data-toggle="popover"
                        data-content="Открыть раздел Заявки сервиса Договор">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-rectangle-list fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Заявки</div>
@@ -110,7 +110,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/mailATC/incoming.php?mode=thisyear"
                        class="text-secondary" data-toggle="popover" data-content="Входящая почта АТ Система">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-envelope-open fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Входящая АТ</div>
@@ -119,7 +119,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/mailATC/outgoing.php?mode=thisyear"
                        class="text-secondary" data-toggle="popover" data-content="Исходящая почта АТ Система">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-envelope fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Иcходящая АТ
@@ -129,7 +129,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/hr" class="text-secondary"
                        data-toggle="popover" data-content="Открыть сервис Кадры">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-people-group fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Кадры</div>
@@ -139,7 +139,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/eda" class="text-secondary"
                        data-toggle="popover" data-content="Открыть сервис заказа обедов Еда 2.0">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-mug-hot fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Еда 2.0</div>
@@ -148,7 +148,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/ism" class="text-secondary"
                        data-toggle="popover" data-content="Открыть сервис ИСМ/СМК">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-folder-tree fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">ИСМ/СМК</div>
@@ -157,7 +157,7 @@
                 <div class="service-item d-flex flex-column text-secondary">
                     <div id="portalCloudFiles-button" class="text-secondary" data-toggle="popover"
                          data-content="Посмотреть содержимое Облака">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-cloud fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Облако</div>
@@ -192,7 +192,7 @@
                 <div class="card-body text-secondary corner-textbox">
                     <div class="card-text text-center align-self-center mb-0">
                         <h5 class="<?php echo $cardTitle_H5_class; ?>">Список контактов АТГС</h5>
-                        <a class="getDoc-SpTel-button <?php echo $getSpTel_btn_class; ?>" role="button"
+                        <a class="getDoc-SpTel-button                                                      <?php echo $getSpTel_btn_class; ?>" role="button"
                            data-toggle="popover"
                            data-content="<div class='text-center w-100'>Скачать актуальный файл со списком внутренних телефонов и электронной почты сотрудников в офисе в привычном оформлении.</div>">Получить
                             документ</a>
@@ -203,7 +203,7 @@
         <div class="card card-bottom-right border-transparent corner-box corner-box-bottomR h-50" style="width:100%">
             <div class="d-flex flex-column">
                 <div class="card-body text-secondary corner-textbox">
-                    <h5 class="<?php echo $cardTitle_H5_class; ?>">Область <?php echo $tmpJoke1; ?></h5>
+                    <h5 class="<?php echo $cardTitle_H5_class; ?>">Область<?php echo $tmpJoke1; ?></h5>
                     <div class="d-flex flex-column">
                         <p class="text-center">Здесь что-то скоро будет...</p>
                     </div>
@@ -232,7 +232,7 @@
                 <div class="service-item d-flex flex-column align-items-center text-secondary">
                     <div id="portalCloudFiles-button" class="text-secondary" data-toggle="popover"
                          data-content="Посмотреть содержимое Облака">
-                        <div class="service-icon px-5 py-2 mb-1 text-center">
+                        <div class="service-icon px-5 py-2 mb-2 text-center">
                             <i class="fa-solid fa-cloud fa-2xl"></i>
                         </div>
                         <div class="service-title_S text-center">Облако</div>
