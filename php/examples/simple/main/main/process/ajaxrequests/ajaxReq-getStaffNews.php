@@ -106,7 +106,7 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                     $i++;
                 }
                 //
-                $_QRY_OutPersons = mysqlQuery("SELECT kodwokerkart, wokerendname, wokerfistname, wokersecondname FROM hr_docwokerkart WHERE kodwokerkart IN (SELECT kodwoker FROM hr_docworkerworkend WHERE datedocworkend > (NOW() - INTERVAL 14 DAY) AND showonmain='1' ORDER BY datedocworkend DESC)");
+                $_QRY_OutPersons = mysqlQuery("SELECT kodwokerkart, wokerendname, wokerfistname, wokersecondname FROM hr_docwokerkart WHERE kodwokerkart IN (SELECT kodwoker FROM hr_docworkerworkend WHERE datedocworkend > (NOW() - INTERVAL 7 DAY) AND showonmain='1' ORDER BY datedocworkend DESC)");
                 $personsOut      = "";
                 $i               = 0;
                 while ($_ROW_OutPersons = mysqli_fetch_assoc($_QRY_OutPersons)) {
