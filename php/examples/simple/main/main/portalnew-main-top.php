@@ -565,7 +565,7 @@ $(document).ready(function() {
         <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/_assets/images/avatars/users/999-avatar-1.jpg"
              class="align-self-center mr-3 rounded-circle" width="64" alt=""
              title="Ярослав Чугунов, администратор Портала">
-        <div class="body">
+        <div class="body" style="flex-grow:1">
             <p class="text"><span>Коллеги!</span><br><span><?php echo __ADMSETTINGS_MSG_TEXT; ?></span></p>
         </div>
 
