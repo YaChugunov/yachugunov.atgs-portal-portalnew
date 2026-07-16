@@ -1,0 +1,572 @@
+<!-- ===== БЛОК СЕРВИСОВ ЗАКАЗА ОБЕДОВ (СВЕТЛАЯ ТЕМА) ===== -->
+<style>
+    .services-wrapper-light {
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 24px;
+        padding: 30px 40px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        font-family: 'Stolzl Book', Arial, Helvetica Neue, Helvetica, sans-serif;
+        background: #ffffff;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .services-wrapper-light:hover {
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .services-wrapper-light .decor-blur-1 {
+        position: absolute;
+        top: -30%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.04) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .services-wrapper-light .decor-blur-2 {
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .services-content-light {
+        position: relative;
+        z-index: 1;
+    }
+
+    .services-header-light {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .services-header-light .badge-services-light {
+        display: inline-block;
+        background: #f1f5f9;
+        color: #334155;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 50px;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+    }
+
+    .services-header-light h2 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        line-height: 1.2;
+        color: #0f172a;
+    }
+
+    .services-header-light h2 .highlight {
+        color: #F97316;
+    }
+
+    .services-header-light .subtitle-light {
+        font-size: 1rem;
+        color: #64748b;
+        font-weight: 400;
+    }
+
+    .services-grid-light {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .service-card-light {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 24px 20px;
+        border: 1px solid #f1f5f9;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        color: #0f172a;
+        position: relative;
+        overflow: hidden;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .service-card-light::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(249, 115, 22, 0.01) 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .service-card-light:hover {
+        transform: translateY(-6px);
+        border-color: rgba(249, 115, 22, 0.15);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .service-card-light .card-content-light {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .service-icon-light {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+    }
+
+    .service-card-light:hover .service-icon-light {
+        transform: scale(1.05);
+    }
+
+    .service-icon-light.orange-light {
+        background: rgba(249, 115, 22, 0.10);
+        color: #F97316;
+    }
+
+    .service-icon-light.green-light {
+        background: rgba(34, 197, 94, 0.10);
+        color: #22C55E;
+    }
+
+    .service-icon-light.purple-light {
+        background: rgba(139, 92, 246, 0.10);
+        color: #8B5CF6;
+    }
+
+    .service-card-light .service-name-light {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: #0f172a;
+    }
+
+    .service-card-light .service-desc-light {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-bottom: 16px;
+    }
+
+    .service-rating-light {
+        margin-bottom: 16px;
+    }
+
+    .service-rating-light .stars-light {
+        color: #F97316;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .service-rating-light .rating-value-light {
+        color: #94a3b8;
+        font-size: 0.75rem;
+        margin-left: 6px;
+    }
+
+    .service-features-light {
+        text-align: left;
+        margin-top: 4px;
+        flex: 1;
+    }
+
+    .service-features-light .feature-item-light {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 8px;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        border-radius: 4px;
+    }
+
+    .service-features-light .feature-item-light:hover {
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    .service-features-light .feature-item-light:last-child {
+        border-bottom: none;
+    }
+
+    .service-features-light .feature-item-light .feature-label-light {
+        color: #475569;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .service-features-light .feature-item-light .feature-label-light i {
+        font-size: 0.9rem;
+        opacity: 0.6;
+        color: #94a3b8;
+    }
+
+    .service-features-light .feature-item-light .feature-status-light {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 600;
+        font-size: 0.75rem;
+    }
+
+    .feature-status-light .status-yes-light {
+        color: #22C55E;
+    }
+
+    .feature-status-light .status-no-light {
+        color: #EF4444;
+    }
+
+    .feature-status-light .status-mid-light {
+        color: #F97316;
+    }
+
+    .service-card-light .btn-service-light {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 16px;
+        padding: 10px 24px;
+        background: rgba(249, 115, 22, 0.06);
+        color: #F97316;
+        border: 1px solid rgba(249, 115, 22, 0.10);
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .service-card-light .btn-service-light:hover {
+        background: #F97316;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
+        transform: translateY(-2px);
+    }
+
+    .service-card-light .btn-service-light i {
+        transition: transform 0.3s ease;
+    }
+
+    .service-card-light .btn-service-light:hover i {
+        transform: translateX(4px);
+    }
+
+    .service-card-light .popular-badge-light {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: linear-gradient(135deg, #F97316, #FF5722);
+        color: white;
+        font-size: 0.55rem;
+        font-weight: 700;
+        padding: 3px 12px;
+        border-radius: 50px;
+        letter-spacing: 0.5px;
+        z-index: 2;
+        text-transform: uppercase;
+    }
+
+    .service-card-light .popular-badge-light i {
+        margin-right: 4px;
+        font-size: 0.5rem;
+    }
+
+    @media (max-width: 992px) {
+        .services-grid-light {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .services-wrapper-light {
+            padding: 24px 28px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .services-wrapper-light {
+            padding: 20px 16px;
+            border-radius: 20px;
+        }
+
+        .services-header-light h2 {
+            font-size: 1.4rem;
+        }
+
+        .services-grid-light {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .service-card-light {
+            min-height: auto;
+            padding: 20px 16px;
+        }
+
+        .service-icon-light {
+            width: 52px;
+            height: 52px;
+            font-size: 1.4rem;
+        }
+
+        .service-card-light .service-name-light {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .services-wrapper-light {
+            padding: 16px 12px;
+            border-radius: 16px;
+        }
+
+        .services-header-light h2 {
+            font-size: 1.2rem;
+        }
+
+        .services-header-light .subtitle-light {
+            font-size: 0.85rem;
+        }
+
+        .service-card-light .btn-service-light {
+            font-size: 0.8rem;
+            padding: 8px 16px;
+        }
+
+        .service-features-light .feature-item-light {
+            font-size: 0.7rem;
+            padding: 4px 0;
+        }
+    }
+
+    @keyframes servicesLightFadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .services-wrapper-light {
+        animation: servicesLightFadeInUp 0.6s ease forwards;
+    }
+
+    .service-card-light {
+        opacity: 0;
+        animation: servicesLightFadeInUp 0.5s ease forwards;
+    }
+
+    .service-card-light:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .service-card-light:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .service-card-light:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    /* Единый popover с цельной границей */
+    .bs-popover-top>.arrow,
+    .bs-popover-auto[x-placement^="top"]>.arrow {
+        bottom: calc(-0.5rem) !important;
+    }
+
+
+    .popover {
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .popover .popover-body {
+        font-family: "Stolzl Book", Arial, Helvetica Neue, Helvetica, sans-serif;
+        text-align: center;
+        padding: 12px 16px;
+        border-radius: 8px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Стрелка - делаем ее частью тела */
+    .popover .popover-arrow {
+        z-index: 1;
+    }
+
+    .popover .popover-arrow::before {
+        border-color: rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .popover .popover-arrow::after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        transform: rotate(45deg);
+        z-index: 3;
+    }
+
+    /* Справа (основной вариант для левого расположения) */
+    .popover.bs-popover-right .popover-arrow::after {
+        left: 1px;
+        top: 0;
+        border: none;
+        border-right: none;
+        border-top: none;
+        background: #fff;
+    }
+
+    /* Слева */
+    .popover.bs-popover-left .popover-arrow::after {
+        right: 1px;
+        bottom: 0;
+        border: none;
+        border-left: none;
+        border-bottom: none;
+        background: #fff;
+    }
+
+    /* Сверху */
+    .popover.bs-popover-top .popover-arrow::after {
+        top: 1px;
+        left: 0;
+        border: none;
+        border-top: none;
+        border-left: none;
+        background: #fff;
+    }
+
+    /* Снизу */
+    .popover.bs-popover-bottom .popover-arrow::after {
+        bottom: 1px;
+        right: 0;
+        border: none;
+        border-bottom: none;
+        border-right: none;
+        background: #fff;
+    }
+
+    /* Темная тема */
+    .popover.popover-dark {
+        background: #2d2d2d;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .popover.popover-dark .popover-body {
+        color: #f0f0f0;
+        background: #2d2d2d;
+    }
+
+    .popover.popover-dark .popover-arrow::before {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .popover.popover-dark .popover-arrow::after {
+        background: #2d2d2d;
+    }
+</style>
+
+<div class="services-wrapper-light" id="servicesBlock">
+    <div class="decor-blur-1"></div>
+    <div class="decor-blur-2"></div>
+    <div class="services-content-light">
+        <div class="services-header-light">
+            <span class="badge-services-light"><i class="fa-solid fa-utensils me-1"></i> Выберите сервис</span>
+            <h2>Закажите обед с <span class="highlight">комфортом</span></h2>
+            <div class="subtitle-light">Три сервиса для разных потребностей — выберите свой</div>
+        </div>
+        <div class="services-grid-light" id="servicesGrid">
+            <?php foreach ($servicesConfig['services'] as $service): ?>
+            <div class="service-card-light" data-service="<?php echo $service['id']; ?>">
+                <?php if ($service['popular']): ?>
+                <div class="popular-badge-light"><i class="fa-solid fa-fire"></i> Популярный</div>
+                <?php endif; ?>
+                <div class="card-content-light">
+                    <div class="service-icon-light <?php echo $service['icon_class']; ?>-light">
+                        <i class="<?php echo $service['icon']; ?>"></i>
+                    </div>
+                    <div class="service-name-light"><?php echo $service['name']; ?></div>
+                    <div class="service-desc-light"><?php echo $service['desc']; ?></div>
+                    <div class="service-rating-light">
+                        <span class="stars-light"><?php echo $service['rating']; ?></span>
+                        <span class="rating-value-light"><?php echo $service['rating_value']; ?></span>
+                    </div>
+                    <div class="service-features-light">
+                        <?php foreach ($service['features'] as $feature): ?>
+                        <div class="feature-item-light" data-toggle="popover" data-trigger="hover" data-placement="left"
+                             data-content="<?php echo htmlspecialchars($feature['popover']); ?>">
+                            <span class="feature-label-light">
+                                <i class="<?php echo $feature['icon']; ?>" style="min-width:24px"></i>
+                                <?php echo $feature['label']; ?>
+                            </span>
+                            <span class="feature-status-light">
+                                <span class="<?php echo $statusMap[$feature['status']]['class']; ?>-light">
+                                    <i class="<?php echo $statusMap[$feature['status']]['icon']; ?>"></i>
+                                    <?php echo $statusMap[$feature['status']]['text']; ?>
+                                </span>
+                            </span>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <a href="<?php echo $service['btn_link']; ?>" class="btn-service-light">
+                        <span><?php echo $service['btn_text']; ?></span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#servicesBlock .feature-item-light').popover({
+            trigger: 'click hover',
+            placement: 'top',
+            html: true,
+            container: 'body'
+        });
+    });
+</script>
