@@ -376,20 +376,20 @@ $(document).ready(function() {
 $(function() {
     // Для темной темы
     $('#servicesBlock .feature-item').popover({
-        trigger: 'click',
+        trigger: 'hover',
         placement: 'top',
         html: true,
         container: 'body',
-        template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body" style="max-width:280px;font-size:0.8rem;padding:10px 14px;"></div></div>'
+        template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body" style="min-width:280px;max-width:320px;font-size:0.8rem;padding:10px 14px;"></div></div>'
     });
 
     // Для светлой темы
     $('#servicesBlock .feature-item-light').popover({
-        trigger: 'click',
+        trigger: 'hover',
         placement: 'top',
         html: true,
         container: 'body',
-        template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body" style="max-width:280px;font-size:0.8rem;padding:10px 14px;"></div></div>'
+        template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body" style="min-width:280px;max-width:320px;font-size:0.8rem;padding:10px 14px;"></div></div>'
     });
 });
 </script>

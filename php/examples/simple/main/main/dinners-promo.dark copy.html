@@ -525,9 +525,12 @@
             <?php foreach ($servicesConfig['services'] as $service): ?>
             <div class="service-card" data-service="<?php echo $service['id']; ?>">
                 <?php if ($service['popular']): ?>
-                <div class="popular-badge"><i class="fa-solid fa-fire"></i>Теперь открыт для всех</div>
+                <div class="popular-badge"><i class="fa-solid fa-fire"></i> Популярный</div>
                 <?php endif; ?>
-                <div class="card-content mt-3">
+                <div class="card-content">
+                    <div class="service-icon <?php echo $service['icon_class']; ?>">
+                        <i class="<?php echo $service['icon']; ?>"></i>
+                    </div>
                     <div class="service-name"><?php echo $service['name']; ?></div>
                     <div class="service-desc"><?php echo $service['desc']; ?></div>
                     <div class="service-rating">
@@ -551,7 +554,7 @@
                         </div>
                         <?php endforeach; ?>
                     </div>
-                    <a href="<?php echo $service['btn_link']; ?>" target="_blank" class="btn-service">
+                    <a href="<?php echo $service['btn_link']; ?>" class="btn-service">
                         <span><?php echo $service['btn_text']; ?></span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
