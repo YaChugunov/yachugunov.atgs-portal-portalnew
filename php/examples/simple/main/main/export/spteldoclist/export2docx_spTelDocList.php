@@ -434,10 +434,10 @@ $cell = $tableCmn->addCell(11000, $_cellBorderAllSpecial_gSpan5_bgcolor_2px)->ad
 $tableCmn->addRow(180, array('cantSplit' => true));
 # Вставляем столбцы
 $cell = $tableCmn->addCell(200, $_cellBorderNone)->addTextRun($_TBL_CELLAlign_H_Left)->addText("", $_FontStyle_Doc_P9);
-$cell = $tableCmn->addCell(4400, $_cellBorderAll)->addTextRun($_TBL_CELLAlign_H_Left)->addText("НИЖНИЙ НОВГОРОД<w:br />Фролова Марина Владимировна<w:br />Носова Ирина Юрьевна", $_FontStyle_Doc_P9_B);
+$cell = $tableCmn->addCell(4400, $_cellBorderAll)->addTextRun($_TBL_CELLAlign_H_Left)->addText("НИЖНИЙ НОВГОРОД<w:br />Носова Ирина Юрьевна", $_FontStyle_Doc_P9_B);
 $cell = $tableCmn->addCell(1500, $_cellBorderAll)->addTextRun($_TBL_CELLAlign_H_Center)->addText("", $_FontStyle_Doc_P9_B);
 $cell = $tableCmn->addCell(2400, $_cellBorderAll)->addTextRun($_TBL_CELLAlign_H_Center)->addText("8 (831) 435 5618<w:br />8 (831) 435 5630<w:br />8 (831) 435 5617", $_FontStyle_Doc_P9);
-$cell = $tableCmn->addCell(2500, $_cellBorderAll)->addTextRun($_TBL_CELLAlign_H_Center)->addText("nn@atgs.ru<w:br />frolova@atgs.ru<w:br />nosova@atgs.ru", $_FontStyle_Doc_P9);
+$cell = $tableCmn->addCell(2500, $_cellBorderAll)->addTextRun($_TBL_CELLAlign_H_Center)->addText("nn@atgs.ru<w:br />nosova@atgs.ru", $_FontStyle_Doc_P9);
 //
 # Вставляем строку
 $tableCmn->addRow(180, array('cantSplit' => true));
