@@ -10,7 +10,7 @@
 	"zeroRecords": "За сегодня каких-либо действий пользователей в БД не найдено",
 	"emptyTable": "Сегодня никто пока не совершал каких-либо действий в Портале. Будьте первыми!",
 	"paginate": {
-    	"first": "<i class='fa-solid fa-angles-left'></i>",
+		"first": "<i class='fa-solid fa-angles-left'></i>",
 		"previous": "<i class='fa-solid fa-left-long'></i>",
 		"next": "<i class='fa-solid fa-right-long'></i>",
 		"last": "<i class='fa-solid fa-angles-right'></i>"
@@ -21,10 +21,9 @@
 	},
 	"select": {
 		"rows": {
-                "_": "Выбрано %d запись (-и)",
-                "0": "",
-                "1": "Выбрана 1 запись"
+			"_": "Выбрано %d запись (-и)",
+			"0": "",
+			"1": "Выбрана 1 запись"
 		}
 	}
-
 }

@@ -1084,7 +1084,8 @@ $(document).ready(function() {
             </div>
 
         </div>
-    </div> <?php
+    </div>
+    <?php
 }
 ?>
 
