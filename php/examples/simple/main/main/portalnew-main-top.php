@@ -575,6 +575,521 @@ $(document).ready(function() {
 
 }
 ?>
+
+
+    <?php if (checkIsItSuperadmin_defaultDB($_SESSION['id']) == 1 || 1==1) {?>
+
+    <!-- ===== БАННЕР "НОВАЯ ЕДА" ===== -->
+    <style>
+    /* Базовые стили баннера (не конфликтуют с проектом) */
+    .banner-newfood-wrapper {
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 24px;
+        border-radius: 24px;
+        padding: 30px 40px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        font-family: 'Stolzl Book', Arial, Helvetica Neue, Helvetica, sans-serif;
+        /* ФОН КАК В ОСНОВНОМ СЕРВИСЕ */
+        background: url('_assets/images/portal_banner_background.png') center center / cover no-repeat;
+    }
+
+    /* Затемнение поверх фона для лучшей читаемости текста */
+    .banner-newfood-wrapper::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.82);
+        z-index: 0;
+        border-radius: 24px;
+    }
+
+    /* Декоративные элементы поверх затемнения */
+    .banner-newfood-wrapper::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .banner-newfood-wrapper .decor-blur {
+        position: absolute;
+        bottom: -40%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(102, 126, 234, 0.06) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .banner-newfood-wrapper:hover {
+        transform: translateY(-4px);
+    }
+
+    .banner-newfood-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: stretch;
+        gap: 40px;
+    }
+
+    /* QR-код */
+    .banner-newfood-qr {
+        flex-shrink: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .banner-newfood-qr .qr-wrapper {
+        display: inline-block;
+        background: white;
+        padding: 12px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .banner-newfood-qr .qr-wrapper:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 40px rgba(249, 115, 22, 0.2);
+    }
+
+    .banner-newfood-qr .qr-wrapper img {
+        display: block;
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+    }
+
+    .banner-newfood-qr .qr-label {
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .banner-newfood-qr .qr-label i {
+        color: #F97316;
+    }
+
+    /* Текст слева (заголовок) */
+    .banner-newfood-text {
+        flex: 0 0 auto;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .banner-newfood-text .badge-new {
+        display: inline-block;
+        background: linear-gradient(135deg, #737373, #121212);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 50px;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+        width: fit-content;
+    }
+
+    .banner-newfood-text h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        line-height: 1.2;
+        background: linear-gradient(135deg, #F97316, #FF5722);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .banner-newfood-text .subtitle {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 400;
+    }
+
+    /* ===== БЛОК СООБЩЕНИЯ В ЧАТЕ ===== */
+    .banner-newfood-chat {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+        border-left: 1px solid rgba(255, 255, 255, 0.15);
+        min-height: 100%;
+    }
+
+    .chat-message {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        width: 100%;
+        padding: 8px 0;
+    }
+
+    .chat-avatar {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #F97316, #FF5722);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+        user-select: none;
+        margin-top: 2px;
+    }
+
+    .chat-bubble {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 16px 16px 16px 4px;
+        padding: 16px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .chat-bubble .chat-text {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+
+    .chat-bubble .chat-text i {
+        color: #F97316;
+    }
+
+    .chat-bubble .chat-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .chat-bubble .chat-time {
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-bubble .btn-go-chat {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: linear-gradient(135deg, #F97316, #FF5722);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+        cursor: pointer;
+    }
+
+    .chat-bubble .btn-go-chat:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(249, 115, 22, 0.5);
+        color: white;
+        text-decoration: none;
+    }
+
+    .chat-bubble .btn-go-chat i {
+        font-size: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .chat-bubble .btn-go-chat:hover i {
+        transform: translateX(4px);
+    }
+
+    .chat-avatar {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+        user-select: none;
+        margin-top: 2px;
+        border: 2px solid rgba(249, 115, 22, 0.3);
+    }
+
+    .chat-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Адаптация */
+    @media (max-width: 992px) {
+        .banner-newfood-content {
+            flex-wrap: wrap;
+        }
+
+        .banner-newfood-qr {
+            flex: 0 0 100%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .banner-newfood-qr .qr-label {
+            margin-top: 0;
+        }
+
+        .banner-newfood-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .banner-newfood-chat {
+            padding-left: 0;
+            border-left: none;
+            flex: 1;
+            min-width: 280px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .banner-newfood-wrapper {
+            padding: 24px 20px;
+            border-radius: 20px;
+        }
+
+        .banner-newfood-content {
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .banner-newfood-qr {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .banner-newfood-qr .qr-wrapper img {
+            width: 140px;
+            height: 140px;
+        }
+
+        .banner-newfood-text h2 {
+            font-size: 1.6rem;
+        }
+
+        .banner-newfood-text .subtitle {
+            font-size: 1rem;
+        }
+
+        .banner-newfood-chat {
+            padding-left: 0;
+            border-left: none;
+            width: 100%;
+        }
+
+        .chat-message {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+        }
+
+        .chat-bubble {
+            border-radius: 16px;
+            width: 100%;
+        }
+
+        .chat-bubble .chat-footer {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .chat-bubble .btn-go-chat {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .banner-newfood-wrapper {
+            padding: 18px 14px;
+            border-radius: 16px;
+        }
+
+        .banner-newfood-qr .qr-wrapper img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .banner-newfood-qr .qr-wrapper {
+            padding: 8px;
+        }
+
+        .banner-newfood-text h2 {
+            font-size: 1.3rem;
+        }
+
+        .banner-newfood-text .subtitle {
+            font-size: 0.85rem;
+        }
+
+        .banner-newfood-text .badge-new {
+            font-size: 0.55rem;
+            padding: 3px 10px;
+        }
+
+        .chat-bubble .chat-text {
+            font-size: 0.8rem;
+        }
+
+        .chat-bubble .btn-go-chat {
+            font-size: 0.8rem;
+            padding: 8px 16px;
+        }
+
+        .chat-avatar {
+            width: 38px;
+            height: 38px;
+            font-size: 1rem;
+        }
+    }
+
+    /* Анимация появления */
+    @keyframes bannerFadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .banner-newfood-wrapper {
+        animation: bannerFadeInUp 0.6s ease forwards;
+    }
+
+    /* Анимация пульсации аватарки */
+    @keyframes avatarPulse {
+
+        0%,
+        100% {
+            box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+        }
+
+        50% {
+            box-shadow: 0 4px 30px rgba(249, 115, 22, 0.6);
+        }
+    }
+
+    .chat-avatar {
+        animation: avatarPulse 2s ease-in-out infinite;
+    }
+    </style>
+
+    <!-- ===== HTML БАННЕРА ===== -->
+    <div class="banner-newfood-wrapper">
+        <!-- Декоративный элемент -->
+        <div class="decor-blur"></div>
+
+        <div class="banner-newfood-content">
+
+            <!-- QR-код -->
+            <div class="banner-newfood-qr">
+                <div class="qr-wrapper">
+                    <img src="_assets/images/qr-newdinner-atgs-ru_small.gif"
+                         alt="QR-код для перехода на newdinner.atgs.ru/promo"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23ffffff%22/%3E%3Ctext x=%2250%22 y=%22100%22 font-family=%22Arial%22 font-size=%2212%22 fill=%22%23333%22%3EQR-код%3C/text%3E%3Ctext x=%2235%22 y=%22120%22 font-family=%22Arial%22 font-size=%2210%22 fill=%22%23666%22%3Enewdinner.atgs.ru%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="qr-label">
+                    <i class="fa-solid fa-qrcode"></i> Наведите камеру
+                </div>
+            </div>
+
+            <!-- Текст слева (заголовок) -->
+            <div class="banner-newfood-text">
+                <span class="badge-new"><i class="fa fa-star-fill me-1"></i> Powered by DeepSeek AI</span>
+                <h2>Новая Еда</h2>
+                <div class="subtitle">
+                    Новое видение старого сервиса
+                </div>
+            </div>
+
+            <!-- ===== БЛОК СООБЩЕНИЯ В ЧАТЕ ===== -->
+            <div class="banner-newfood-chat">
+                <div class="chat-message">
+                    <!-- Аватар -->
+                    <div class="chat-avatar">
+                        <img src="_assets/images/me-bw-square-1-128x128.png" alt="Админ">
+                    </div>
+                    <!-- Пузырь сообщения -->
+                    <div class="chat-bubble">
+                        <div class="chat-text">
+                            Набирается <strong style="color:#F97316;">15 смелых</strong> и отчаянных бета-тестеров для
+                            нового сервиса. Буквально на 2-3 недели заказов. Основные ошибки уже отловлены.
+                            Надеюсь.)<br>
+                            С вас — активное пользование сервисом и <strong style="color:#F97316;">обратная
+                                связь</strong>, если чего не так, неудобно, некрасиво или нашли
+                            ошибку.<br>
+                            С меня — повышенный контроль над вашими заказами и оперативная реакция на ваши замечания.
+                            <strong style="color:#F97316;">Голодными
+                                не оставлю</strong>, не переживайте.
+                        </div>
+
+                        <div class="chat-footer">
+                            <span class="chat-time">
+                                Ярослав Чугунов
+                            </span>
+                            <a href="https://newdinner.atgs.ru/promo" class="btn-go-chat ml-auto" target="_blank">
+                                <span>Хочу в бета-тестеры</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="https://newdinner.atgs.ru" class="btn-go-chat" target="_blank">
+                                <span>Уже бета-тестер</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> <?php
+}
+?>
+
+
+
     <div class="d-flex flex-row justify-content-center">
         <div id="portalnew-main-top-block-1" class="card border-transparent mb-3 mx-2 corner-box corner-box-topC"
              style="min-width:100%; height:15rem">
