@@ -153,7 +153,7 @@ function ajaxRequest_liveSearchUser(strSearch, responseHandler) {}
 
 <div class="container d-flex flex-column">
 
-    <div id="portalnew-main-center-icons" class="d-flex flex-row justify-content-center py-3">
+    <div id="portalnew-main-center-icons" class="d-flex flex-row justify-content-between py-3">
         <div class="service-item d-flex flex-column">
             <div class="service-icon px-5 pt-2 pb-1">
                 <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/sp/index.php?type=contragents&mode=main">
