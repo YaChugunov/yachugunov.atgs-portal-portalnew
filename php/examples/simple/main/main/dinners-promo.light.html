@@ -132,6 +132,18 @@
         flex-direction: column;
     }
 
+    .service-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+    }
+
     .service-icon-light {
         width: 64px;
         height: 64px;
@@ -505,53 +517,110 @@
     .popover.popover-dark .popover-arrow::after {
         background: #2d2d2d;
     }
+
+    /* Дополнительные стили для collapse */
+    .services-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: transparent;
+        border: none;
+        color: #F97316;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 8px 16px;
+        transition: all 0.3s ease;
+        font-family: 'Stolzl Book', Arial, Helvetica Neue, Helvetica, sans-serif;
+        margin-top: 8px;
+    }
+
+    .services-toggle-btn:hover {
+        color: #FF5722;
+    }
+
+    .services-toggle-btn .collapse-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+    }
+
+    .services-toggle-btn .collapse-icon.rotated {
+        transform: rotate(180deg);
+    }
+
+    .services-collapse-wrap {
+        transition: all 0.3s ease;
+    }
+
+    .services-collapse-wrap.collapsing {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    .services-collapse-wrap.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 
 <div class="services-wrapper-light" id="servicesBlock">
     <div class="decor-blur-1"></div>
     <div class="decor-blur-2"></div>
     <div class="services-content-light">
+        <!-- Заголовок - всегда виден -->
         <div class="services-header-light">
             <h2><?php echo $servicesConfig['title']; ?></h2>
             <div class="subtitle"><?php echo $servicesConfig['subtitle']; ?></div>
+            <button class="services-toggle-btn" type="button" data-toggle="collapse"
+                    data-target="#servicesCollapseLight" aria-expanded="false" aria-controls="servicesCollapseLight">
+                <span id="toggleTextLight">Показать варианты</span>
+                <i class="fa-solid fa-chevron-down collapse-icon" id="toggleIconLight"></i>
+            </button>
         </div>
-        <div class="services-grid-light" id="servicesGrid">
-            <?php foreach ($servicesConfig['services'] as $service): ?>
-            <div class="service-card-light" data-service="<?php echo $service['id']; ?>">
-                <?php if ($service['popular']): ?>
-                <div class="popular-badge-light"><i class="fa-solid fa-fire"></i>Теперь открыт для всех</div>
-                <?php endif; ?>
-                <div class="card-content-light mt-3">
-                    <div class="service-name-light"><?php echo $service['name']; ?></div>
-                    <div class="service-desc-light"><?php echo $service['desc']; ?></div>
-                    <div class="service-rating-light">
-                        <span class="stars-light"><?php echo $service['rating']; ?></span>
-                        <span class="rating-value-light"><?php echo $service['rating_value']; ?></span>
-                    </div>
-                    <div class="service-features-light">
-                        <?php foreach ($service['features'] as $feature): ?>
-                        <div class="feature-item-light" data-toggle="popover" data-trigger="hover" data-placement="left"
-                             data-content="<?php echo htmlspecialchars($feature['popover']); ?>">
-                            <span class="feature-label-light">
-                                <i class="<?php echo $feature['icon']; ?>" style="min-width:24px"></i>
-                                <?php echo $feature['label']; ?>
-                            </span>
-                            <span class="feature-status-light">
-                                <span class="<?php echo $statusMap[$feature['status']]['class']; ?>-light">
-                                    <i class="<?php echo $statusMap[$feature['status']]['icon']; ?>"></i>
-                                    <?php echo $statusMap[$feature['status']]['text']; ?>
-                                </span>
-                            </span>
+
+        <!-- Сворачиваемая часть -->
+        <div class="services-collapse-wrap collapse" id="servicesCollapseLight">
+            <div class="services-grid-light" id="servicesGrid">
+                <?php foreach ($servicesConfig['services'] as $service): ?>
+                <div class="service-card-light" data-service="<?php echo $service['id']; ?>">
+                    <?php if ($service['popular']): ?>
+                    <div class="popular-badge-light"><i class="fa-solid fa-fire"></i>Теперь открыт для всех</div>
+                    <?php endif; ?>
+                    <div class="card-content-light mt-3">
+                        <div class="service-name-light"><?php echo $service['name']; ?></div>
+                        <div class="service-desc-light"><?php echo $service['desc']; ?></div>
+                        <div class="service-rating-light">
+                            <span class="stars-light"><?php echo $service['rating']; ?></span>
+                            <span class="rating-value-light"><?php echo $service['rating_value']; ?></span>
                         </div>
-                        <?php endforeach; ?>
+                        <div class="service-features-light">
+                            <?php foreach ($service['features'] as $feature): ?>
+                            <div class="feature-item-light" data-toggle="popover" data-trigger="hover"
+                                 data-placement="left"
+                                 data-content="<?php echo htmlspecialchars($feature['popover']); ?>">
+                                <span class="feature-label-light">
+                                    <i class="<?php echo $feature['icon']; ?>" style="min-width:24px"></i>
+                                    <?php echo $feature['label']; ?>
+                                </span>
+                                <span class="feature-status-light">
+                                    <span class="<?php echo $statusMap[$feature['status']]['class']; ?>-light">
+                                        <i class="<?php echo $statusMap[$feature['status']]['icon']; ?>"></i>
+                                        <?php echo $statusMap[$feature['status']]['text']; ?>
+                                    </span>
+                                </span>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <a href="<?php echo $service['btn_link']; ?>" target="_blank" class="btn-service-light">
+                            <span><?php echo $service['btn_text']; ?></span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
-                    <a href="<?php echo $service['btn_link']; ?>" target="_blank" class="btn-service-light">
-                        <span><?php echo $service['btn_text']; ?></span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
                 </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
     </div>
 </div>
@@ -563,6 +632,16 @@
             placement: 'top',
             html: true,
             container: 'body'
+        });
+        // Обработка toggle для светлой темы
+        $('#servicesCollapseLight').on('show.bs.collapse', function () {
+            $('#toggleTextLight').text('Скрыть варианты');
+            $('#toggleIconLight').addClass('rotated');
+        });
+
+        $('#servicesCollapseLight').on('hide.bs.collapse', function () {
+            $('#toggleTextLight').text('Показать варианты');
+            $('#toggleIconLight').removeClass('rotated');
         });
     });
 </script>

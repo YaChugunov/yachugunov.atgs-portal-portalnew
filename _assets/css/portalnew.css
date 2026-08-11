@@ -11,11 +11,12 @@
 }
 
 
-#portalnew-main-center-icons .service-icon {
+/* #portalnew-main-center-icons .service-icon {
     min-width: 64px;
     min-height: 64px;
 }
 
+*/
 #portalnew-main-center-icons .service-item:hover {
     background-color: #31373C;
     border-radius: 1rem;
