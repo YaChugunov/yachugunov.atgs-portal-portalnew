@@ -16,6 +16,9 @@ require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/functions/func.sec
 # Подключаем собственные функции сервиса Почта
 require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/functions/func.portal.inc.php';
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+# Подключаем собственные функции сервиса Почта
+require_once __DIR_ROOT . __SERVICENAME_PORTALNEW . '/_assets/libs/phpqrcode/lib/qrlib.php';
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 # Включаем режим сессии
 // session_start();
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
@@ -48,6 +51,25 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                 $sumtot     = $_ROW_SUMTOT['sum'];
                 $userName   = $_SESSION['firstname'] . " " . $_SESSION['middlename'];
 
+                // ---------------------------------------------------------
+                // 1. Генерируем URL
+                // ---------------------------------------------------------
+                $url = 'http://dinner.atgs.ru/index.php?view_my_order_today=' . $unique_key;
+                // Имя файла для QR-кода
+                $filePath = __DIR_ROOT . __SERVICENAME_PORTALNEW . '/tmp/qrcodes/qr_' . $unique_key . '.png';
+                // URL, по которому картинка будет доступна в браузере
+                $fileUrl = 'http://192.168.1.89/portalnew/tmp/qrcodes/qr_' . $unique_key . '.png';
+                // ---------------------------------------------------------
+                // 2. Генерируем QR-код
+                // ---------------------------------------------------------
+                // Параметры: (текст, путь_к_файлу, уровень коррекции, размер модуля, отступ)
+                // 'H' = высокая коррекция ошибок (лучше читается сканером)
+                QRcode::png($url, $filePath, 'H', 10, 2);
+                // Проверка, создался ли файл
+                if (!file_exists($filePath)) {
+                    die('Ошибка: не удалось создать файл QR-кода. Проверь права на запись в папку и наличие расширения GD.');
+                }
+
                 $_QRY_1  = mysqlQuery_atgsdinner("SELECT `order_id`, SUM(item_total) as sum, `order_to_date` FROM `orders_item` WHERE MONTH(`order_to_date`) = MONTH(NOW()) AND YEAR(`order_to_date`) = YEAR(NOW()) AND `order_user_id`='" . $_SESSION['id'] . "' GROUP BY `order_id`");
                 $sum_0   = 0.00;
                 $sum_dop = 0.00;
@@ -72,50 +94,45 @@ if (isset($_SESSION['password']) && isset($_SESSION['login'])) {
                 }
                 $output .= '<div class="d-flex flex-column">';
                 if ($_QRY && $unique_key != "") {
-                    $output .= '<img id="QR-currentDinner" class="mb-3 w-75 mx-auto" src="http://qrcoder.ru/code/?http%3A%2F%2Fdinner.atgs.ru%2Findex.php%3Fview_my_order_today%3D' . $unique_key . '&3&0" alt="Мой обед сегодня" data-toggle="popover" />';
-                    $output .= '<p class="small text-center mb-4">' . $userName . ', <br>Ваш QR-код проверен и актуален</p>';
-                } else {
-                    $output .= '<p class="small text-danger text-center mb-4">' . $userName . '!<br>Если вы не видите QR-код или с ним что-то не так, срочно телеграфируйте администратору</p>';
-                }
-                $output .= '<div class="d-flex flex-row justify-content-between mb-3">';
-                if ($_QRY_SUMTOT && $sumtot != "") {
-                    $output .= '<div class="d-flex flex-column align-items-center w-50">';
-                    $output .= '<div class="digit text-info" data-toggle="popover" data-content="Общая сумма за текущий месяц, на которую вы сделали заказы">' . number_format($sumtot, 0, ".", " ") . '</div>';
-                    $output .= '<div class="text text-secondary">съели за месяц</div>';
-                    $output .= '</div>';
-                } else {
-                    $output .= '';
-                }
-                if ($_QRY_NUM != "") {
-                    $output .= '<div class="d-flex flex-column align-items-center w-50">';
-                    $output .= '<div class="digit text-info" data-toggle="popover" data-content="Количество дней за текущий месяц, на которые вы сделали заказ">' . $_QRY_NUM . '</div>';
-                    $output .= '<div class="text text-secondary">заказов за месяц</div>';
-                    $output .= '</div>';
-                } else {
-                    $output .= '';
-                }
-                $output .= '</div>';
-                //
-                //
-                $output .= '<div class="d-flex flex-row justify-content-between">';
-                if ($_QRY_1 && ! empty($sum_0) && ! empty($sum_dop)) {
-                    $output .= '<div class="d-flex flex-column align-items-center w-50">';
-                    $output .= '<div class="digit text-info" data-toggle="popover" data-content="Сумма на текущий месяц, которая будет покрыта компанией из расчета лимита в ' . $limit . ' р. (до ' . date("d.m.Y", strtotime($LIMITUP_DATE)) . ' лимит был ' . $limit_old . ' р.)">' . number_format($sum_0, 0, ".", " ") . '</div>';
-                    $output .= '<div class="text text-secondary">заплатит АТГС</div>';
-                    $output .= '</div>';
-                    $output .= '<div class="d-flex flex-column align-items-center w-50">';
-                    $output .= '<div class="digit text-info data-toggle="popover" data-content="Сумма на текущий месяц, не покрываемая лимитом, которая будет вычтена из вашей зарплаты">' . number_format($sum_dop, 0, ".", " ") . '</div>';
-                    $output .= '<div class="text text-secondary">заплатите вы</div>';
-                    $output .= '</div>';
-                } else {
-                    $output .= '';
-                }
-                $output .= '</div>';
-                $output .= '</div>';
-            }
-        }
-    }
+                    $output .= '<img id="QR-currentDinner" class="mb-3 w-75 mx-auto" src="'.htmlspecialchars($fileUrl).'" alt="Мой обед сегодня" data-toggle="popover" />';
+$output .= '<p class="small text-center mb-4">' .$userName. ', <br>Ваш QR-код проверен и актуален</p>';
+} else {
+$output .= '<p class="small text-danger text-center mb-4">' . $userName . '!<br>Если вы не видите QR-код или с ним
+    что-то не так, срочно телеграфируйте администратору</p>';
 }
-unset($_POST);
-// Вывод сообщений о результате загрузки.
-echo $output;
+$output .= '<div class="d-flex flex-row justify-content-between mb-3">';
+    if ($_QRY_SUMTOT && $sumtot != "") {
+    $output .= '<div class="d-flex flex-column align-items-center w-50">';
+        $output .= '<div class="digit text-info" data-toggle="popover"
+             data-content="Общая сумма за текущий месяц, на которую вы сделали заказы">' . number_format($sumtot, 0,
+            ".", " ") . '</div>';
+        $output .= '<div class="text text-secondary">съели за месяц</div>';
+        $output .= '</div>';
+    } else {
+    $output .= '';
+    }
+    if ($_QRY_NUM != "") {
+    $output .= '<div class="d-flex flex-column align-items-center w-50">';
+        $output .= '<div class="digit text-info" data-toggle="popover"
+             data-content="Количество дней за текущий месяц, на которые вы сделали заказ">' . $_QRY_NUM . '</div>';
+        $output .= '<div class="text text-secondary">заказов за месяц</div>';
+        $output .= '</div>';
+    } else {
+    $output .= '';
+    }
+    $output .= '</div>';
+//
+//
+$output .= '<div class="d-flex flex-row justify-content-between">';
+    if ($_QRY_1 && ! empty($sum_0) && ! empty($sum_dop)) {
+    $output .= '<div class="d-flex flex-column align-items-center w-50">';
+        $output .= '<div class="digit text-info" data-toggle="popover"
+             data-content="Сумма на текущий месяц, которая будет покрыта компанией из расчета лимита в ' . $limit . ' р. (до ' . date("
+             d.m.Y", strtotime($LIMITUP_DATE)) . ' лимит был ' . $limit_old . ' р.)">' . number_format($sum_0, 0, "."
+             , " " ) . '</div>' ; $output .='<div class="text text-secondary">заплатит АТГС</div>' ; $output .='</div>'
+             ; $output .='<div class="d-flex flex-column align-items-center w-50">' ; $output
+             .='<div class="digit text-info data-toggle="popover" data-content="Сумма на текущий месяц, не покрываемая лимитом, которая будет вычтена из вашей зарплаты">'
+             . number_format($sum_dop, 0, "." , " " ) . '</div>' ; $output
+             .='<div class="text text-secondary">заплатите вы</div>' ; $output .='</div>' ; } else { $output .='' ; }
+             $output .='</div>' ; $output .='</div>' ; } } } } unset($_POST); // Вывод сообщений о результате загрузки.
+             echo $output;
