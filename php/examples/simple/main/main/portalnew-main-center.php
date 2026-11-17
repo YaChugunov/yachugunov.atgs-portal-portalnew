@@ -173,11 +173,41 @@ function ajaxRequest_liveSearchUser(strSearch, responseHandler) {}
             <div class="service-title text-center">Почта</div>
         </div>
         <div class="service-item d-flex flex-column">
-            <div id="portalCloudFiles-button" class="service-icon px-5 pt-2 pb-1">
-                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/php/examples/simple/main/cloudFiles/favicon.ico"
-                     alt="" width="64" height="64" class="d-inline-block align-text-middle">
+            <div class="service-icon px-5 pt-2 pb-1">
+                <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/filebox/run/index.php?section=slides"
+                   title="Раздел с презентациями и докладами компании. Здесь собраны материалы с отраслевых мероприятий, конференций и внутренних встреч. Посетители могут быстро найти выступления экспертов и руководителей компании, слайды с ключевыми данными и итоги дискуссий.">
+                    <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/filebox/assets/images/favicons/favicon.ico"
+                         alt="" width="64" height="64" class="d-inline-block align-text-middle">
+                </a>
             </div>
-            <div class="service-title text-center">Облако</div>
+            <div class="service-title text-center">Презентации</div>
+        </div>
+        <div class="service-item d-flex flex-column">
+            <div class="service-icon px-5 pt-2 pb-1">
+                <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/filebox/run/index.php?section=smk">
+                    <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/filebox/assets/images/favicons/favicon.ico"
+                         alt="" width="64" height="64" class="d-inline-block align-text-middle">
+                </a>
+            </div>
+            <div class="service-title text-center">Новый ИСМ / СМК</div>
+        </div>
+        <div class="service-item d-flex flex-column" data-toggle="popover"
+             data-content="Новая версия кадрового сервиса. На финальной стадии тестирования и отладки. У тех, кому положено, уже работает.)">
+            <div class="service-icon px-5 pt-2 pb-1">
+                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/hr2/assets/images/favicons/favicon.ico" alt=""
+                     width="64" height="64" class="d-inline-block align-text-middle">
+            </div>
+            <div class="service-title text-center">Кадры 2</div>
+        </div>
+        <div class="service-item d-flex flex-column" data-toggle="popover"
+             data-content="Радикально новая версия сервиса для заказа обедов максимально адаптированная для мобильных платформ">
+            <div class=" service-icon px-5 pt-2 pb-1">
+                <a href="https://newdinner.atgs.ru" target="_blank">
+                    <img src="https://newdinner.atgs.ru/apple-touch-icon.png" alt="" width="64" height="64"
+                         class="d-inline-block align-text-middle">
+                </a>
+            </div>
+            <div class="service-title text-center">Новая еда</div>
         </div>
         <div class="service-item inactive d-flex flex-column" data-toggle="popover"
              data-content="1-я очередь (3-4 квартал, 2024)">
@@ -194,30 +224,6 @@ function ajaxRequest_liveSearchUser(strSearch, responseHandler) {}
                      alt="" width="64" height="64" class="d-inline-block align-text-middle">
             </div>
             <div class="service-title text-center text-secondary">Субподрядчики</div>
-        </div>
-        <div class="service-item inactive d-flex flex-column" data-toggle="popover"
-             data-content="2-я очередь (2-3 квартал, 2024)">
-            <div class="service-icon px-5 pt-2 pb-1">
-                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/_assets/images/service-icons/icon-serviceLocked.svg"
-                     alt="" width="64" height="64" class="d-inline-block align-text-middle">
-            </div>
-            <div class="service-title text-center text-secondary">Новые кадры</div>
-        </div>
-        <div class="service-item inactive d-flex flex-column" data-toggle="popover"
-             data-content="2-я очередь (1-2 квартал, 2025)">
-            <div class=" service-icon px-5 pt-2 pb-1">
-                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/_assets/images/service-icons/icon-serviceLocked.svg"
-                     alt="" width="64" height="64" class="d-inline-block align-text-middle">
-            </div>
-            <div class="service-title text-center text-secondary">Новая СМК</div>
-        </div>
-        <div class="service-item inactive d-flex flex-column" data-toggle="popover"
-             data-content="3-я очередь (3-4 квартал, 2024)">
-            <div class=" service-icon px-5 pt-2 pb-1">
-                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/portalnew/_assets/images/service-icons/icon-serviceLocked.svg"
-                     alt="" width="64" height="64" class="d-inline-block align-text-middle">
-            </div>
-            <div class="service-title text-center text-secondary">Новая еда</div>
         </div>
     </div>
 
